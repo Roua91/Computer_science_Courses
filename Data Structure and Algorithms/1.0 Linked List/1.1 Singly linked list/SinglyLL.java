@@ -1,42 +1,87 @@
-package linklist;
-import java.util.*;
+import java.util.Scanner;
 
-public class SinglyLL{
-  public static void main(String[] args){
-    Scanner sc = new Scanner(System.in);
-    Linkedlist list= new Linkedlist();
+public class SinglyLL {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        LinkedList list = new LinkedList();
 
-    boolean falg = true;
-    int valu; int posi=0;
+        boolean flag = true;
+        int valu, posi;
 
-    while(flag){
-      System.out.println();
-      System.out.println("1. Add item to the list at start");
-      System.out.println("2.Add item to the list at last");
-      System.out.println("3. Add item to the list at posit");
-      System.out.println("4. Delete first node");
-      System.out.println("5. Delete last node");
-      System.out.println("6. Delete node at position");
-      System.out.println("7. Update node at position");
-      System.out.println("8. Reverse link list");
-      System.out.println("9. View list");
-      System.out.println("10. Get List size");
-      System.out.println("Exit");
-      System.out.println();
-      System.out.println("Enter a choice");
-      int choice = sc.nextInt();
+        while (flag) {
+            System.out.println("\n1. Add item to the list at start" +
+                    "\n2. Add item to the list at last" +
+                    "\n3. Add item to the list at position" +
+                    "\n4. Delete first node" +
+                    "\n5. Delete last node" +
+                    "\n6. Delete node at position" +
+                    "\n7. Update node at position" +
+                    "\n8. Reverse link list" +
+                    "\n9. View list" +
+                    "\n10. Get List size" +
+                    "\n11. Exit");
 
-      switch(choice){
-        case 1: System.out.println("Enter a value");
-          valu= sc.nextInt();
-          list.insertAtFirst(valu);
-        break; 
+            System.out.println("\nEnter a choice:");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter value:");
+                    valu = sc.nextInt();
+                    list.insertAtFirst(valu);
+                    break;
+                case 2:
+                    System.out.println("Enter value:");
+                    valu = sc.nextInt();
+                    list.insertAtLast(valu);
+                    break;
+                case 3:
+                    System.out.println("Enter value:");
+                    valu = sc.nextInt();
+                    System.out.println("Enter position:");
+                    posi = sc.nextInt();
+                    list.insertAtPos(valu, posi);
+                    break;
+                case 4:
+                    list.deleteFirst();
+                    break;
+                case 5:
+                    list.deleteLast();
+                    break;
+                case 6:
+                    System.out.println("Enter position:");
+                    posi = sc.nextInt();
+                    list.deleteAtPos(posi);
+                    break;
+                case 7:
+                    System.out.println("Enter value:");
+                    valu = sc.nextInt();
+                    System.out.println("Enter position:");
+                    posi = sc.nextInt();
+                    list.updateData(valu, posi);
+                    break;
+                case 8:
+                    list.reverseList();
+                    break;
+                case 9:
+                    list.viewList();
+                    break;
+                case 10:
+                    System.out.println("List size: " + list.getListSize());
+                    break;
+                case 11:
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+                    break;
+            }
         }
+        sc.close(); // Close scanner if it's the end of its use
     }
-  }
 }
 
-class Linkedlist{
+class LinkedList{
   class Node{
     private int data; private Node next;
     public Node(){
@@ -52,7 +97,7 @@ class Linkedlist{
   private Node start;
   private int size;
 
-  public Linkedlist(){
+  public LinkedList(){
     start =null;
     size = 0;
   }
@@ -91,7 +136,7 @@ class Linkedlist{
     }
     System.out.print("null");
   }
-  public void insertATFirst(int val){
+  public void insertAtFirst(int val){
     Node n = new Node();
     n.setData(val);
     if(!isEmpty()){
@@ -109,7 +154,7 @@ class Linkedlist{
       while(t.getNext()!=null){
         t=t.getNext();
       }
-      t.setNext();
+      t.setNext(n);
     }
     size++;
   }
