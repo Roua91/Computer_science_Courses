@@ -167,3 +167,36 @@ public class ArrayOperations {
         scanner.close();
     }
 }
+
+import java.util.Scanner;
+
+class ArrayOperations{
+    public statics void main(String args){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println() //keep going
+    }
+
+    public void getElem(int index){
+        if(index <= 0 || index < arr.size){
+            System.out.println("The elemnt in index "+ index + " is "+ arr[index]);
+        }
+        else{
+            System.out.println("Invalid input");
+        }
+    }
+
+    public void InsertElment(int index, int element){
+        if(index >= 0 && index <= size){}
+    }
+}
+
+
+if (insertIndex >= 0 && insertIndex <= size) {
+                    int[] newArr = new int[size + 1];
+                    System.arraycopy(arr, 0, newArr, 0, insertIndex);
+                    newArr[insertIndex] = valueToInsert;
+                    System.arraycopy(arr, insertIndex, newArr, insertIndex + 1, size - insertIndex);
+                    arr = newArr;
+                    size++;
+                    System.out.println("Element inserted successfully!");
