@@ -1,4 +1,4 @@
-public class OOP1 {
+public class OOP2 {
     public static void main(String[] args) {
         System.out.println("Hello world");
         User u = new User(); // Creating an object of User class
