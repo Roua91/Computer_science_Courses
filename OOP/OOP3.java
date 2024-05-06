@@ -1,4 +1,4 @@
-public class OOP1 {
+public class OOP3 {
     public static void main(String[] args) {
         System.out.println("Hello world");
         User u = new User(); // Creating an object of User class
@@ -12,8 +12,8 @@ public class OOP1 {
 }
 
 public class User {
-    private String _name; // Private variable to store the user's name
-    private Membership _membership; // Private variable to store the user's membership status
+    private String _name; 
+    private Membership _membership; 
 
     void set_name(String name) {
         _name = name; // Setter method for setting the user's name
