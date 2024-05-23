@@ -13,6 +13,14 @@ Selection Sort is a simple comparison-based sorting algorithm. It works by repea
 5. Move the boundary of the sorted subarray one element to the right.
 6. Repeat until the entire array is sorted.
 
-## Selection Sort in Python
+### Selection Sort in Python
 [SelectionSort.py](https://github.com/Roua91/Courses/blob/main/Algorithms/Sorting/SelectionSort/SelectionSort.py)
+
+### Selection Sort in Java
+[SelectionSort.java](https://github.com/Roua91/Courses/blob/main/Algorithms/Sorting/SelectionSort/SelectionSort.java)
+
+## Explanation
+Outer Loop: Runs from the start of the array to the second to last element. It tracks the boundary of the sorted and unsorted subarrays.
+Inner Loop: Finds the minimum element in the unsorted subarray.
+Swapping: After finding the minimum element, it is swapped with the first element of the unsorted subarray, effectively expanding the sorted subarray by one element
 
