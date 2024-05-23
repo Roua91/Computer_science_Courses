@@ -14,5 +14,5 @@ Selection Sort is a simple comparison-based sorting algorithm. It works by repea
 6. Repeat until the entire array is sorted.
 
 ## Selection Sort in Python
-[SelectionSort.py]([URL](https://github.com/Roua91/Courses/blob/main/Algorithms/Sorting/SelectionSort/SelectionSort.py))
+[SelectionSort.py](https://github.com/Roua91/Courses/blob/main/Algorithms/Sorting/SelectionSort/SelectionSort.py)
 
