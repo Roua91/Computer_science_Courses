@@ -1,5 +1,5 @@
 # Quick Sort
-'1- Choosing a Pivot:' Quick Sort starts by selecting a 'pivot' element from the array. The choice of the pivot can vary, but common strategies include picking the last element, the first element, or a random element.
+_1- Choosing a Pivot:_ Quick Sort starts by selecting a 'pivot' element from the array. The choice of the pivot can vary, but common strategies include picking the last element, the first element, or a random element.
 
 2- Partitioning: The main task in Quick Sort is to partition the array into two halves:
 - Elements less than or equal to the pivot are moved to the left of the pivot.
