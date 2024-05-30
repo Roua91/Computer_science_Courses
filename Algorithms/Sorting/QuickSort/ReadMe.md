@@ -17,5 +17,9 @@ Stability: Quick Sort is not stable because the swapping of elements can change 
 - Average Case: O(n log n)
 - Worst Case: O(n^2) - The pivot is the smallest or largest element, leading to highly unbalanced partitions.
 
+### Illustration
+  ![image](https://github.com/Roua91/Courses/assets/165356652/b3543e1a-9148-4e1f-9347-46529f4fb0b7)
+
+
 ## Java Implementation 
 [QuickSort.java](https://github.com/Roua91/Courses/blob/main/Algorithms/Sorting/QuickSort/QuickSort.java)
