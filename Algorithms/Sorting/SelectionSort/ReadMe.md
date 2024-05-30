@@ -20,6 +20,11 @@ Stability: Selection Sort is not stable because it can change the relative order
 - Average Case: O(n^2)
 - Worst Case: O(n^2)
 
+
+### Illustration
+  ![image](https://github.com/Roua91/Courses/assets/165356652/f36a77cd-0575-43a8-9a16-e30050811d89)
+
+
 ## Selection Sort in Python
 [SelectionSort.py](https://github.com/Roua91/Courses/blob/main/Algorithms/Sorting/SelectionSort/SelectionSort.py)
 
