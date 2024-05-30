@@ -12,11 +12,10 @@
    - If the target value is greater than the middle element, narrow the search to the right half of the array by adjusting `low`.
 4. **Repeat**: Repeat the process until the target is found or the search interval is empty (i.e., `low` exceeds `high`).
 
-### Key Characteristics
-
-- **Time Complexity**: O(log n), where n is the number of elements in the array. This makes Binary Search very efficient for large datasets.
-- **Space Complexity**: O(1), since it only requires a few extra variables for tracking the search interval.
-- **Precondition**: The array must be sorted prior to performing Binary Search.
+### Time Complexity of Binary search
+- Best Case: O(1) - target is the middle element.
+- Average Case: O(log n) - logarithmic reduction in search space.
+- Worst Case: O(log n) - target is not present, the search space is halved repeatedly.
 
 ## java implementation 
 [BinarySearch.java](https://github.com/Roua91/Courses/tree/main/Algorithms/Search/BinarySearch)
