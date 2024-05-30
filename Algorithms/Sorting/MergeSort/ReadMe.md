@@ -1,7 +1,7 @@
 # Merge Sort
 ### Definition:
 Merge Sort is a stable, divide-and-conquer sorting algorithm that divides the array into halves, recursively sorts them, and then merges the sorted halves to produce a fully sorted array.
-\
+/
 ### Process:
 - Divide the array into two halves.
 - Recursively sort each half.
