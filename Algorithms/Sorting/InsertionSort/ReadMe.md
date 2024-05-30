@@ -22,6 +22,8 @@ A sorting algorithm is stable if it maintains the relative order of equal elemen
 - Average Case: O(n^2) - The elements are in random order.
 - Worst Case: O(n^2) - The array is sorted in reverse order.
 
+
+### Illustration 
   ![image](https://github.com/Roua91/Courses/assets/165356652/31ec084d-93ba-43ce-9f13-c370b8e3b71b)
 
 
