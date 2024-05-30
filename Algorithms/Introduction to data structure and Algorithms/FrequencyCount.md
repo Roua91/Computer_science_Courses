@@ -6,7 +6,7 @@
 ```java
 public class SimpleLoop {
     public static void main(String[] args) {
-        int n = 10; // n+1
+        int n = 10; // 1
         for (int i = 0; i < n; i++) { // n+1 for initialization, n+1 for condition check
             System.out.println(i); // n
         }
@@ -15,9 +15,9 @@ public class SimpleLoop {
 ```
 
 **Explanation**:
-- `int n = 10;` executes once (n+1).
+- `int n = 10;` executes once 1.
 - `for (int i = 0; i < n; i++)` initialization executes once (n+1), condition check executes (n+1) times, and increment executes (n) times.
-- `System.out.println(i);` executes `n` times.
+- `System.out.println(i);` executes `n` times.\
 
 ### Frequency Count for Nested Loops
 
@@ -26,9 +26,9 @@ public class SimpleLoop {
 ```java
 public class NestedLoop {
     public static void main(String[] args) {
-        int n = 10; // n+1
-        for (int i = 0; i < n; i++) { // n+1 for initialization, n+1 for condition check, n for increment
-            for (int j = 0; j < n; j++) { // n * (n+1) for initialization, n * (n+1) for condition check, n * n for increment
+        int n = 10; // 1
+        for (int i = 0; i < n; i++) { // n+1 for condition check
+            for (int j = 0; j < n; j++) { // n * (n+1) 
                 System.out.println(i + ", " + j); // n * n
             }
         }
@@ -42,7 +42,7 @@ public class NestedLoop {
   - Initialization: `n * (n+1)`
   - Condition check: `n * (n+1)`
   - Increment: `n * n`
-  - `System.out.println(i + ", " + j);` executes `n * n` times.
+  - `System.out.println(i + ", " + j);` executes `n * n` times.\
 
 ### Frequency Count for Recursive Function
 
@@ -51,8 +51,8 @@ public class NestedLoop {
 ```java
 public class RecursiveFunction {
     public static void main(String[] args) {
-        int n = 5; // n+1
-        System.out.println(factorial(n)); // n+1
+        int n = 5; // 1
+        System.out.println(factorial(n)); // 1
     }
 
     public static int factorial(int n) {
@@ -69,7 +69,7 @@ public class RecursiveFunction {
 - `int n = 5;` and `System.out.println(factorial(n));` execute once (n+1).
 - `if (n <= 1)` executes `n+1` times.
 - Base case `return 1;` executes once.
-- Recursive call `return n * factorial(n - 1);` executes `n` times.
+- Recursive call `return n * factorial(n - 1);` executes `n` times.\
 
 ### Frequency Count for Other Examples
 
@@ -96,7 +96,7 @@ public class CombinationExample {
 - `if (i % 2 == 0)` executes `n` times.
 - `System.out.println(i + " is even");` and `System.out.println(i + " is odd");` each execute `n/2` times.
 
-Sure! Here are more examples involving loops with exponential and logarithmic complexity, with frequency counts annotated in Java syntax.
+Sure! Here are more examples involving loops with exponential and logarithmic complexity, with frequency counts annotated in Java syntax.\
 
 ### Example: Exponential Growth (Fibonacci Sequence)
 
@@ -122,7 +122,7 @@ public class ExponentialGrowth {
 **Explanation**:
 - `int n = 5;` and `System.out.println(fibonacci(n));` each execute once.
 - `if (n <= 1)` executes for every recursive call.
-- The recursive calls create an exponential growth in the number of executions, leading to a time complexity of \(O(2^n)\).
+- The recursive calls create an exponential growth in the number of executions, leading to a time complexity of $(O(2^n)$.\
 
 
 ### Example: Logarithmic Complexity (Binary Search)
@@ -165,7 +165,7 @@ public class LogarithmicSearch {
 - Binary search while loop: `log(n)+1` iterations.
 - Mid calculation and comparison: `log(n)` times.
 - Adjusting low or high: `log(n)` times.
-- Overall, the binary search has a time complexity of \(O(\log n)\).
+- Overall, the binary search has a time complexity of $O(\log n)$.\
 
 ### Example: Nested Loops with Logarithmic Complexity
 
@@ -187,7 +187,7 @@ public class LogarithmicNestedLoop {
 **Explanation**:
 - Outer loop with `i *= 2` runs \( \log(n) \) times.
 - Inner loop with `j *= 2` also runs \( \log(n) \) times for each iteration of the outer loop.
-- The total number of print statements executed is \( \log(n) \times \log(n) \), leading to a time complexity of \(O((\log n)^2)\).
+- The total number of print statements executed is \( \log(n) \times \log(n) \), leading to a time complexity of $O((\log n)^2)$.\
 
 
 ### Example: Combination of Exponential and Logarithmic
@@ -212,6 +212,6 @@ public class ExponentialWithLogarithmic {
 **Explanation**:
 - Outer loop initialization, condition check, and increment: `n+1`, `n+1`, `n`.
 - Inner loop with `j *= 2` runs \( \log(n) \) times for each iteration of the outer loop.
-- Total print statements: `n \times \log(n)`, leading to a time complexity of \(O(n \log n)\).
+- Total print statements: `n \times \log(n)`, leading to a time complexity of $O(n \log n)$.
 
 
