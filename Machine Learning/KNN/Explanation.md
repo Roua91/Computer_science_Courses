@@ -17,7 +17,7 @@ The K-Nearest Neighbors (KNN) algorithm is a simple, yet powerful, supervised ma
    - Common distance metrics include Euclidean distance, Manhattan distance, and Minkowski distance.
    - Euclidean distance is the most commonly used and is calculated as follows:
      $
-     \text{Euclidean distance} = $sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}$
+     \text{Euclidean distance} = sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}
      $
      where $( x_i \)$ and $( y_i \)$ are the feature values of the test and training data points, respectively, and $( n \)$ is the number of features.
 
@@ -41,9 +41,9 @@ Suppose we have a dataset of animals, where each animal is labeled as either a c
 
 3. **Compute Distance:**
    - Calculate the Euclidean distance between the new data point (3, 5) and each training point:
-     - Distance to (2, 4, 'Cat') = $/sqrt{(3-2)^2 + (5-4)^2} = \sqrt{2} \approx 1.41$
-     - Distance to (4, 6, 'Dog') = $/sqrt{(3-4)^2 + (5-6)^2} = \sqrt{2} \approx 1.41$
-     - Distance to (1, 3, 'Cat') = $/sqrt{(3-1)^2 + (5-3)^2} = \sqrt{8} \approx 2.83$
+     - Distance to (2, 4, 'Cat') = $\sqrt{(3-2)^2 + (5-4)^2} = \sqrt{2} \approx 1.41$
+     - Distance to (4, 6, 'Dog') = $\sqrt{(3-4)^2 + (5-6)^2} = \sqrt{2} \approx 1.41$
+     - Distance to (1, 3, 'Cat') = $\sqrt{(3-1)^2 + (5-3)^2} = \sqrt{8} \approx 2.83$
      - Distance to (5, 7, 'Dog') = $\sqrt{(3-5)^2 + (5-7)^2} = \sqrt{8} \approx 2.83$
 
 4. **Find the Nearest Neighbors:**
@@ -52,6 +52,9 @@ Suppose we have a dataset of animals, where each animal is labeled as either a c
 5. **Make a Prediction:**
    - Majority voting: 2 'Cats' and 1 'Dog'. 
    - The new data point (3, 5) is classified as 'Cat'.
+  
+![image](https://github.com/Roua91/Courses/assets/165356652/70f1bf3a-02bd-4659-a608-611d8f9238d1)
+
 
 ### Advantages of KNN
 
