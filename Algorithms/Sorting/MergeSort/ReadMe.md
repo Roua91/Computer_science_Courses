@@ -12,6 +12,10 @@ Merge Sort is a stable, divide-and-conquer sorting algorithm that divides the ar
 Stability: Merge Sort is stable because it maintains the relative order of equal elements during the merging process.
 
 ### Time Complexity:
-- Best Case: O(n log n)
-- Average Case: O(n log n)
-- Worst Case: O(n log n)
+- Best Case: $O(n log n)$
+- Average Case: $O(n log n)$
+- Worst Case: $O(n log n)$
+
+### Illustration
+  ![image](https://github.com/Roua91/Courses/assets/165356652/d2678bae-d9b4-487c-9759-6165c0955464)
+
