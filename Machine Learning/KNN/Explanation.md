@@ -16,7 +16,8 @@ The K-Nearest Neighbors (KNN) algorithm is a simple, yet powerful, supervised ma
    - For a given test data point, calculate the distance between this point and all the points in the training set.
    - Common distance metrics include Euclidean distance, Manhattan distance, and Minkowski distance.
    - Euclidean distance is the most commonly used and is calculated as follows:\
-     $\text{Euclidean distance} = sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}$
+     ![image](https://github.com/Roua91/Courses/assets/165356652/77cd86fe-62aa-4b20-a0b8-8f6204d94e6b)
+
      where $( x_i \)$ and $( y_i \)$ are the feature values of the test and training data points, respectively, and $( n \)$ is the number of features.
 
 4. **Find the Nearest Neighbors:**
