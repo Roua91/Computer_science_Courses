@@ -99,5 +99,8 @@ Pruning is used to remove parts of the tree that do not provide power to classif
 - **Bias:** Can be biased towards attributes with more levels.
 - **Computationally Expensive:** Growing a tree and finding the best split can be computationally intensive.
 
+### Quick Explination in youtube
+https://youtu.be/JcI5E2Ng6r4?si=R3bVLq34sYrpYnJn
+
 ### Conclusion
 Decision trees are powerful tools for both classification and regression tasks. They are easy to understand and interpret but can suffer from overfitting and high variance. Techniques like pruning help to mitigate these issues. Understanding the construction and evaluation of decision trees is crucial for effectively using them in various machine learning tasks.
