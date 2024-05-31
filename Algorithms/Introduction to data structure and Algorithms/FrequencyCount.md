@@ -214,4 +214,14 @@ public class ExponentialWithLogarithmic {
 - Inner loop with `j *= 2` runs \( \log(n) \) times for each iteration of the outer loop.
 - Total print statements: `n \times \log(n)`, leading to a time complexity of $O(n \log n)$.
 
+## Passes
+**Definition:**
+
+A pass refers to a complete traversal or scan through the data set by an algorithm.
+In the context of sorting algorithms, a pass often means going through the entire list once to perform a specific action.
+
+**Usage:**
+Passes are commonly discussed in algorithms where the entire data set is processed multiple times in separate, distinct rounds.
+
+#<img width="548" alt="image" src="https://github.com/Roua91/Courses/assets/165356652/126e8df9-e6c2-4b40-bcb1-af4604625d0f">
 
