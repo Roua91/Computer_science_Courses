@@ -37,8 +37,8 @@
   - **Euclidean Distance**:
     - Distance between two points $\(X = [x1, x2, ..., xn]\)$ and $\(Y = [y1, y2, ..., yn]\)$ is given by:
       
-      $D(X, Y)$ = $$\sqrt{\sum_{i=1}^n (x_i - y_i)^2}$$
-      \]
+      $$D(X, Y) = \sqrt{\sum_{i=1}^n (x_i - y_i)^2}$$
+      
   - **Manhattan Distance**:
     - Distance between two points $\(X = [x1, x2]\)$ and $\(Y = [y1, y2]\)$ is given by:
       $\[
