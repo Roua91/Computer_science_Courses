@@ -244,27 +244,25 @@ Consider a simple dataset with four attributes: Outlook, Temperature, Humidity, 
      - False: 8 examples (6 Yes, 2 No)
      - True: 6 examples (3 Yes, 3 No)
 
-   \[
-   $$\text{Entropy(False)} = -\left(\frac{6}{8}\right) \log_2\left(\frac{6}{8}\
+   \
+   $$\text{Entropy(False)} = -\left(\frac{6}{8}\right) \log_2\left(\frac{6}{8}\right) - \left(\frac{2}{8}\right) \log_2\left(\frac{2}{8}\right) = 0.811$$
+   \
 
-right) - \left(\frac{2}{8}\right) \log_2\left(\frac{2}{8}\right) = 0.811$$
-   \]
-
-   \[
+   \
    $$\text{Entropy(True)} = -\left(\frac{3}{6}\right) \log_2\left(\frac{3}{6}\right) - \left(\frac{3}{6}\right) \log_2\left(\frac{3}{6}\right) = 1$$
-   \]
+   \
 
    Weighted sum for Windy:
-   \[
+   \
    $$\text{Entropy(Windy)} = \left(\frac{8}{14}\right) \times 0.811 + \left(\frac{6}{14}\right) \times 1$$
-   \]
-   \[
+   \
+   \
    $$= 0.463 + 0.429 = 0.892$$
-   \]
+   \
 
-   \[
+   \
    $$\text{Gain(S, Windy)} = \text{Entropy(S)} - \text{Entropy(Windy)} = 0.826 - 0.892 = -0.066$$
-   \]
+   \
 
 ### Decision
 - The attribute with the highest information gain is chosen as the root node.
