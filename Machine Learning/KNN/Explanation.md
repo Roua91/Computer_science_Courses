@@ -135,4 +135,5 @@ If we are using $\( k = 3 \)$ for our KNN algorithm, we would consider the three
 - Class of C: 0
 
 The majority class is 0, so point $\( E \)$ would be classified as class 0.
+![image](https://github.com/Roua91/Computer_science_Courses/assets/165356652/419c494d-8fab-4cc3-89c8-22e794acc42a)
 
