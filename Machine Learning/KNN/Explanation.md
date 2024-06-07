@@ -75,9 +75,73 @@
 - It uses a distance function to find the nearest neighbors and classify new instances based on majority vote.
 - Choosing the right K value is crucial to balance bias and variance and achieve optimal performance.
 
-### Class Activity Example
+Certainly! Let's go through an example of calculating the distance between points using the Euclidean distance formula in the context of K-Nearest Neighbors (KNN).
 
-- Consider data with attributes {weight, size} and groups {Apple, Mangosteen}.
-- Predict the type of fruit with given attributes using KNN by calculating distances and voting based on the nearest neighbors.
+### Example: Calculating Euclidean Distance
 
-This summary covers the key points and technical details of the K-Nearest Neighbors (KNN) algorithm from the provided slides.
+Let's consider a dataset with two features: age and income. We have the following points in our dataset:
+
+| Point | Age | Income (in $1000s) | Class |
+|-------|-----|--------------------|-------|
+| A     | 25  | 40                 | 0     |
+| B     | 30  | 60                 | 1     |
+| C     | 35  | 70                 | 0     |
+| D     | 40  | 80                 | 1     |
+
+Now, we have a new point \( E \) with the following attributes:
+
+| Point | Age | Income (in $1000s) |
+|-------|-----|--------------------|
+| E     | 28  | 50                 |
+
+We need to calculate the Euclidean distance between point $\( E \)$ and all the points in our dataset.
+
+### Euclidean Distance Formula
+
+The Euclidean distance between two points $\( (x_1, y_1) \)$ and $\( (x_2, y_2) \)$ in a 2-dimensional space is given by:
+
+$$ \text{distance} = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} $$
+
+### Calculations
+
+1. **Distance between E and A**:
+   $$
+   \text{distance}_{EA} = \sqrt{(28 - 25)^2 + (50 - 40)^2} = \sqrt{3^2 + 10^2} = \sqrt{9 + 100} = \sqrt{109} \approx 10.44
+   $$
+
+2. **Distance between E and B**:
+   $$
+   \text{distance}_{EB} = \sqrt{(28 - 30)^2 + (50 - 60)^2} = \sqrt{(-2)^2 + (-10)^2} = \sqrt{4 + 100} = \sqrt{104} \approx 10.20
+   $$
+
+3. **Distance between E and C**:
+   $$
+   \text{distance}_{EC} = \sqrt{(28 - 35)^2 + (50 - 70)^2} = \sqrt{(-7)^2 + (-20)^2} = \sqrt{49 + 400} = \sqrt{449} \approx 21.19
+   $$
+
+4. **Distance between E and D**:
+   $$
+   \text{distance}_{ED} = \sqrt{(28 - 40)^2 + (50 - 80)^2} = \sqrt{(-12)^2 + (-30)^2} = \sqrt{144 + 900} = \sqrt{1044} \approx 32.31
+   $$
+
+### Summary of Distances
+
+| Point | Distance to E |
+|-------|---------------|
+| A     | 10.44         |
+| B     | 10.20         |
+| C     | 21.19         |
+| D     | 32.31         |
+
+Based on these calculations, the closest points to \( E \) are \( B \) and \( A \).
+
+### KNN Classification
+
+If we are using $\( k = 3 \)$ for our KNN algorithm, we would consider the three closest points to $\( E \)$ (A, B, and C in this case). We would then classify $\( E \)$ based on the majority class among these three points.
+
+- Class of A: 0
+- Class of B: 1
+- Class of C: 0
+
+The majority class is 0, so point $\( E \)$ would be classified as class 0.
+
