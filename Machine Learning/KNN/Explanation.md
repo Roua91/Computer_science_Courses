@@ -1,72 +1,83 @@
-### Introduction to K-Nearest Neighbors (KNN) Algorithm
+# K-Nearest Neighbors (KNN)
 
-The K-Nearest Neighbors (KNN) algorithm is a simple, yet powerful, supervised machine learning algorithm used for classification and regression tasks. It is a type of instance-based learning, where the algorithm makes predictions based on the similarity between the input sample and the training examples.
+- **KNN Definition**:
+  - A powerful classification algorithm used in pattern recognition.
+  - Stores all available cases and classifies new cases based on a similarity measure (e.g., distance function).
+  - Known for being a top data mining algorithm.
+  - Non-parametric lazy learning algorithm, meaning it does not build an abstract model from the training data but uses the training data directly for classification.
 
-### How KNN Works
+- **Why is KNN called lazy?**:
+  - No abstraction or generalization occurs.
+  - Lazy learners do not summarize raw input into a model.
+  - Classification is slow as it involves comparing the test sample with all training samples.
+  - It's instance-based learning where the training data is stored and used directly.
 
-1. **Data Preparation:**
-   - Gather a dataset with labeled data points.
-   - Split the data into a training set and a test set.
+### KNN: Classification Approach
 
-2. **Choose the Number of Neighbors (K):**
-   - Decide on the number of nearest neighbors (K) to consider when making a prediction.
-   - A common choice is to start with K=3 or K=5.
+- **Process**:
+  - A new instance is classified by a majority vote of its nearest neighbors.
+  - The new instance is assigned to the most common class among its K-nearest neighbors, determined by a distance function.
 
-3. **Compute Distance:**
-   - For a given test data point, calculate the distance between this point and all the points in the training set.
-   - Common distance metrics include Euclidean distance, Manhattan distance, and Minkowski distance.
-   - Euclidean distance is the most commonly used and is calculated as follows:\
-     ![image](https://github.com/Roua91/Courses/assets/165356652/77cd86fe-62aa-4b20-a0b8-8f6204d94e6b)
+- **Historical Context**:
+  - Nearest Neighbors method has been used in statistical estimation and pattern recognition since the 1970s.
+  - It remains one of the top 10 Data Mining algorithms due to its simplicity and effectiveness.
 
-     where $( x_i \)$ and $( y_i \)$ are the feature values of the test and training data points, respectively, and $( n \)$ is the number of features.
+### Technical Details
 
-4. **Find the Nearest Neighbors:**
-   - Identify the K training data points that are closest to the test data point.
+- **K-Nearest Neighbor Algorithm**:
+  - Instances correspond to points in an n-dimensional feature space.
+  - Each instance is represented by numerical attributes.
+  - Training data consists of vectors and class labels.
+  - Classification involves comparing feature vectors of K-nearest points.
+  - Assigns the new instance to the most common class among its K-nearest neighbors.
 
-5. **Make a Prediction:**
-   - **For Classification:** Assign the class label that is most common among the K nearest neighbors (majority voting).
-   - **For Regression:** Compute the average value of the K nearest neighbors.
+### Distance Functions
 
-### Example of KNN for Classification
+- **Common Distance Metrics**:
+  - **Euclidean Distance**:
+    - Distance between two points \(X = [x1, x2, ..., xn]\) and \(Y = [y1, y2, ..., yn]\) is given by:
+      \[
+      D(X, Y) = \sqrt{\sum_{i=1}^n (x_i - y_i)^2}
+      \]
+  - **Manhattan Distance**:
+    - Distance between two points \(X = [x1, x2]\) and \(Y = [y1, y2]\) is given by:
+      \[
+      D(X, Y) = |x1 - y1| + |x2 - y2|
+      \]
 
-Suppose we have a dataset of animals, where each animal is labeled as either a cat or a dog based on its features (e.g., weight and height). To classify a new animal as a cat or a dog:
+### Choosing K
 
-1. **Data Preparation:**
-   - Training data: {(2, 4, 'Cat'), (4, 6, 'Dog'), (1, 3, 'Cat'), (5, 7, 'Dog')}
-   - New data point: (3, 5)
+- **Impact of K**:
+  - Small K values can be sensitive to noise and may lead to overfitting.
+  - Larger K values reduce noise sensitivity but may include points from other classes, leading to underfitting.
+  - The rule of thumb is to choose \(K < \sqrt{n}\), where \(n\) is the number of examples.
 
-2. **Choose K:**
-   - Let’s choose K=3.
+- **Bias and Variance**:
+  - Small K results in high variance (overfitting) and low bias.
+  - Large K results in low variance and high bias (underfitting).
+  - Cross-validation is used to fine-tune the K value.
 
-3. **Compute Distance:**
-   - Calculate the Euclidean distance between the new data point (3, 5) and each training point:
-     - Distance to (2, 4, 'Cat') = $\sqrt{(3-2)^2 + (5-4)^2} = \sqrt{2} \approx 1.41$
-     - Distance to (4, 6, 'Dog') = $\sqrt{(3-4)^2 + (5-6)^2} = \sqrt{2} \approx 1.41$
-     - Distance to (1, 3, 'Cat') = $\sqrt{(3-1)^2 + (5-3)^2} = \sqrt{8} \approx 2.83$
-     - Distance to (5, 7, 'Dog') = $\sqrt{(3-5)^2 + (5-7)^2} = \sqrt{8} \approx 2.83$
+### Advantages and Disadvantages of KNN
 
-4. **Find the Nearest Neighbors:**
-   - The 3 nearest neighbors are (2, 4, 'Cat'), (4, 6, 'Dog'), and (1, 3, 'Cat').
+- **Advantages**:
+  - Can be applied to data from any distribution.
+  - Simple and intuitive.
+  - Good classification performance with a large number of samples.
 
-5. **Make a Prediction:**
-   - Majority voting: 2 'Cats' and 1 'Dog'. 
-   - The new data point (3, 5) is classified as 'Cat'.
-  
-![image](https://github.com/Roua91/Courses/assets/165356652/70f1bf3a-02bd-4659-a608-611d8f9238d1)
+- **Disadvantages**:
+  - Dependent on the choice of K value.
+  - Computationally expensive during the test stage as all computations are deferred until classification.
+  - Requires a large number of samples for accurate classification.
 
+### Summary
 
-### Advantages of KNN
+- KNN is a lazy, non-parametric algorithm that defers processing until classification.
+- It uses a distance function to find the nearest neighbors and classify new instances based on majority vote.
+- Choosing the right K value is crucial to balance bias and variance and achieve optimal performance.
 
-- **Simplicity:** Easy to understand and implement.
-- **Versatility:** Can be used for both classification and regression tasks.
-- **No Training Phase:** KNN is a lazy learner; it does not require a training phase, making it suitable for real-time applications.
+### Class Activity Example
 
-### Disadvantages of KNN
+- Consider data with attributes {weight, size} and groups {Apple, Mangosteen}.
+- Predict the type of fruit with given attributes using KNN by calculating distances and voting based on the nearest neighbors.
 
-- **Computationally Intensive:** As the dataset grows, the computation time for distance calculations increases, making it less efficient for large datasets.
-- **Memory Intensive:** Requires storing all training data.
-- **Sensitive to Irrelevant Features:** The presence of irrelevant features can affect the accuracy of the algorithm.
-
-### Conclusion
-
-The KNN algorithm is a straightforward yet effective method for classification and regression tasks. By leveraging the proximity of data points, it can make accurate predictions based on the majority voting or average of the nearest neighbors. However, its performance can be affected by the choice of K, the distance metric, and the presence of irrelevant features. Despite these challenges, KNN remains a popular choice due to its simplicity and ease of implementation.
+This summary covers the key points and technical details of the K-Nearest Neighbors (KNN) algorithm from the provided slides.
