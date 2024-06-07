@@ -41,9 +41,8 @@
       
   - **Manhattan Distance**:
     - Distance between two points $\(X = [x1, x2]\)$ and $\(Y = [y1, y2]\)$ is given by:
-      $$
-      D(X, Y) = |x1 - y1| + |x2 - y2|
-      $$
+      
+      $$D(X, Y) = |x1 - y1| + |x2 - y2|$$
 
 ### Choosing K
 
@@ -105,24 +104,16 @@ $$ \text{distance} = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} $$
 ### Calculations
 
 1. **Distance between E and A**:
-   $$
-   \text{distance}_{EA} = \sqrt{(28 - 25)^2 + (50 - 40)^2} = \sqrt{3^2 + 10^2} = \sqrt{9 + 100} = \sqrt{109} \approx 10.44
-   $$
+   $$\text{distance}_{EA} = \sqrt{(28 - 25)^2 + (50 - 40)^2} = \sqrt{3^2 + 10^2} = \sqrt{9 + 100} = \sqrt{109} \approx 10.44$$
 
 2. **Distance between E and B**:
-   $$
-   \text{distance}_{EB} = \sqrt{(28 - 30)^2 + (50 - 60)^2} = \sqrt{(-2)^2 + (-10)^2} = \sqrt{4 + 100} = \sqrt{104} \approx 10.20
-   $$
+   $$\text{distance}_{EB} = \sqrt{(28 - 30)^2 + (50 - 60)^2} = \sqrt{(-2)^2 + (-10)^2} = \sqrt{4 + 100} = \sqrt{104} \approx 10.20$$
 
 3. **Distance between E and C**:
-   $$
-   \text{distance}_{EC} = \sqrt{(28 - 35)^2 + (50 - 70)^2} = \sqrt{(-7)^2 + (-20)^2} = \sqrt{49 + 400} = \sqrt{449} \approx 21.19
-   $$
+   $$\text{distance}_{EC} = \sqrt{(28 - 35)^2 + (50 - 70)^2} = \sqrt{(-7)^2 + (-20)^2} = \sqrt{49 + 400} = \sqrt{449} \approx 21.19$$
 
 4. **Distance between E and D**:
-   $$
-   \text{distance}_{ED} = \sqrt{(28 - 40)^2 + (50 - 80)^2} = \sqrt{(-12)^2 + (-30)^2} = \sqrt{144 + 900} = \sqrt{1044} \approx 32.31
-   $$
+   $$\text{distance}_{ED} = \sqrt{(28 - 40)^2 + (50 - 80)^2} = \sqrt{(-12)^2 + (-30)^2} = \sqrt{144 + 900} = \sqrt{1044} \approx 32.31$$
 
 ### Summary of Distances
 
