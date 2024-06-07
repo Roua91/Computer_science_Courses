@@ -41,9 +41,9 @@
       
   - **Manhattan Distance**:
     - Distance between two points $\(X = [x1, x2]\)$ and $\(Y = [y1, y2]\)$ is given by:
-      $\[
+      $$
       D(X, Y) = |x1 - y1| + |x2 - y2|
-      \]$
+      $$
 
 ### Choosing K
 
