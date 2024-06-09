@@ -17,7 +17,7 @@
 - **Why is KNN called lazy?**:
   - No abstraction or generalization occurs.
   - Lazy learners do not summarize raw input into a model.
-  - Classification is slow as it involves comparing the test sample with all training samples.
+  - Classification in KNN is slow as it involves comparing the test sample with all training samples, But training is fast unlike other classification models
   - It's instance-based learning where the training data is stored and used directly.
 
 ### KNN: Classification Approach
