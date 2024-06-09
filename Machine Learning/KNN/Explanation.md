@@ -5,6 +5,14 @@
   - Stores all available cases and classifies new cases based on a similarity measure (e.g., distance function).
   - Known for being a top data mining algorithm.
   - Non-parametric lazy learning algorithm, meaning it does not build an abstract model from the training data but uses the training data directly for classification.
+    
+- **KNN different names:**
+    • K-Nearest Neighbors
+    • Memory-Based Reasoning
+    • Example-Based Reasoning
+    • Instance-Based Learning
+    • Lazy Learning
+
 
 - **Why is KNN called lazy?**:
   - No abstraction or generalization occurs.
