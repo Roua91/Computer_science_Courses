@@ -78,7 +78,7 @@ public class RecursiveFunction {
 ```java
 public class CombinationExample {
     public static void main(String[] args) {
-        int n = 10; // n+1
+        int n = 10; // 1
         for (int i = 0; i < n; i++) { // n+1 for initialization, n+1 for condition check, n for increment
             if (i % 2 == 0) { // n
                 System.out.println(i + " is even"); // n/2
@@ -91,7 +91,7 @@ public class CombinationExample {
 ```
 
 **Explanation**:
-- `int n = 10;` executes once (n+1).
+- `int n = 10;` executes once.
 - Outer loop initialization, condition check, and increment: `n+1`, `n+1`, `n`.
 - `if (i % 2 == 0)` executes `n` times.
 - `System.out.println(i + " is even");` and `System.out.println(i + " is odd");` each execute `n/2` times.
