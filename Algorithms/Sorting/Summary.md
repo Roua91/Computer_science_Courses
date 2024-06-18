@@ -1,65 +1,41 @@
-# Summary 
-### Selection Sort
+### Summary Table
 
-- **Complexity**:
-  - Best Case: $O(n^2)$
-  - Average Case: $O(n^2)$
-  - Worst Case: $O(n^2)$
+| Sorting Algorithm | Worst Case Complexity | Stability | Use of Recursion | Passes Calculation |
+|-------------------|------------------------|-----------|------------------|--------------------|
+| **Selection Sort**| \(O(n^2)\)             | Not Stable| Iterative        | \(n-1\)            |
+| **Insertion Sort**| \(O(n^2)\)             | Stable    | Iterative        | \(n-1\)            |
+| **Quick Sort**    | \(O(n^2)\)             | Not Stable| Recursive        | \(\log_2(n)\) (average), \(n\) (worst case) |
+| **Merge Sort**    | \(O(n \log n)\)        | Stable    | Recursive        | \(\log_2(n)\)      |
+| **Shell Sort**    | \(O(n^2)\)             | Not Stable| Iterative        | Depends on gap sequence |
 
-- **Stability**: 
-  - Not stable. The relative order of equal elements may change because of the swapping mechanism.
+### Details
 
-- **Use of Recursion**: 
-  - Does not use recursion. It is an iterative algorithm.
+#### Selection Sort
+- **Worst Case Complexity**: \(O(n^2)\)
+- **Stability**: Not Stable
+- **Use of Recursion**: Iterative
+- **Passes Calculation**: \(n-1\)
 
-### Insertion Sort
+#### Insertion Sort
+- **Worst Case Complexity**: \(O(n^2)\)
+- **Stability**: Stable
+- **Use of Recursion**: Iterative
+- **Passes Calculation**: \(n-1\)
 
-- **Complexity**:
-  - Best Case: $O(n)$
-  - Average Case: $O(n^2)$
-  - Worst Case: $O(n^2)$
+#### Quick Sort
+- **Worst Case Complexity**: \(O(n^2)\)
+- **Stability**: Not Stable
+- **Use of Recursion**: Recursive
+- **Passes Calculation**: \(\log_2(n)\) (average), \(n\) (worst case)
 
-- **Stability**:
-  - Stable. Equal elements retain their relative order.
+#### Merge Sort
+- **Worst Case Complexity**: \(O(n \log n)\)
+- **Stability**: Stable
+- **Use of Recursion**: Recursive
+- **Passes Calculation**: \(\log_2(n)\)
 
-- **Use of Recursion**:
-  - Does not use recursion. It is typically implemented iteratively.
-
-### Quick Sort
-
-- **Complexity**:
-  - Best Case: $O(n \log n)$
-  - Average Case: $O(n \log n)$
-  - Worst Case: $O(n^2)$ (when the pivot elements are poorly chosen)
-
-- **Stability**:
-  - Not stable. The relative order of equal elements may change because of the partitioning process.
-
-- **Use of Recursion**:
-  - Uses recursion. It is a recursive algorithm with the divide-and-conquer approach.
-
-### Merge Sort
-
-- **Complexity**:
-  - Best Case: $O(n \log n)$
-  - Average Case: $O(n \log n)$
-  - Worst Case: $O(n \log n)$
-
-- **Stability**:
-  - Stable. Equal elements retain their relative order during the merging process.
-
-- **Use of Recursion**:
-  - Uses recursion. It is a recursive algorithm that repeatedly divides the array and merges sorted sub-arrays.
-
-### Shell Sort
-
-- **Complexity**:
-  - Best Case: $O(n log n)$ (depends on the gap sequence)
-  - Average Case: $O(n^{1.5})$ (depends on the gap sequence)
-  - Worst Case: $O(n^2)$ (depends on the gap sequence)
-
-- **Stability**:
-  - Not stable. The relative order of equal elements may change because of the gapped insertion process.
-
-- **Use of Recursion**:
-  - Does not typically use recursion. It is an iterative algorithm that uses a sequence of increments (gaps).
+#### Shell Sort
+- **Worst Case Complexity**: \(O(n^2)\)
+- **Stability**: Not Stable
+- **Use of Recursion**: Iterative
+- **Passes Calculation**: Depends on gap sequence
