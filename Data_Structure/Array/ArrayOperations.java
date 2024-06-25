@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.Scanner
 
 public class ArrayOperations {
     private static int[] arr = {10, 20, 30, 40, 50};
