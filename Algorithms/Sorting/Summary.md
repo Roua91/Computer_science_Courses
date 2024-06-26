@@ -11,40 +11,61 @@
 
 
 
-### Details
+## Advantage & Disavantage
 
-#### Selection Sort
-- **Worst Case Complexity**: $(O(n^2)\)$
-- **Stability**: Not Stable
-- **Use of Recursion**: Iterative
-- **Passes Calculation**: $(n-1\)$
+### Selection Sort
+**Advantages:**
+- Simple implementation.
+- In-place sorting (requires \( O(1) \) extra space).
+- Works well for small datasets or when memory is limited.
 
-#### Insertion Sort
-- **Worst Case Complexity**: $(O(n^2)\)$
-- **Stability**: Stable
-- **Use of Recursion**: Iterative
-- **Passes Calculation**: $(n-1\)$
+**Disadvantages:**
+- \( O(n^2) \) time complexity in all cases (worst, average, and best).
+- Not stable (relative order of equal elements may change).
 
-#### Quick Sort
-- **Worst Case Complexity**: $(O(n^2)\)$
-- **Stability**: Not Stable
-- **Use of Recursion**: Recursive
-- **Passes Calculation**: $(\log_2(n)\)$ (average), $(n\)$ (worst case)
+### Insertion Sort
+**Advantages:**
+- Efficient for small datasets or nearly sorted data (\( O(n) \) in best case).
+- Stable (equal elements retain their original order).
 
-#### Merge Sort
-- **Worst Case Complexity**: $(O(n \log n)\)$
-- **Stability**: Stable
-- **Use of Recursion**: Recursive
-- **Passes Calculation**: $(\log_2(n)\)$
+**Disadvantages:**
+- \( O(n^2) \) time complexity in worst and average cases.
+- Inefficient for large datasets due to its quadratic complexity.
 
-#### Shell Sort
-- **Worst Case Complexity**: $(O(n^2)\)$
-- **Stability**: Not Stable
-- **Use of Recursion**: Iterative
-- **Passes Calculation**: Depends on gap sequence
+### Quick Sort
+**Advantages:**
+- \( O(n \log n) \) average time complexity, making it efficient for large datasets.
+- In-place sorting (usually requires \( O(\log n) \) extra space for recursion).
+- Can be implemented to be stable with careful implementation.
+
+**Disadvantages:**
+- \( O(n^2) \) worst-case time complexity (rare but possible with poor pivot selection).
+- Not stable in its typical recursive form (may change relative order of equal elements).
+
+### Merge Sort
+**Advantages:**
+- \( O(n \log n) \) time complexity in all cases.
+- Stable (equal elements retain their original order).
+- Works well with large datasets due to its divide-and-conquer approach.
+
+**Disadvantages:**
+- Requires additional space proportional to the size of the input array (\( O(n) \) space complexity).
+- More complex to implement iteratively compared to recursive version.
+
+### Shell Sort
+**Advantages:**
+- Time complexity depends on the gap sequence used; can be \( O(n \log n) \) with the right sequence.
+- In-place sorting with \( O(1) \) extra space.
+- Simple implementation compared to other \( O(n \log n) \) sorts.
+
+**Disadvantages:**
+- Worst-case time complexity can be \( O(n^2) \) depending on gap sequence.
+- Not stable (order of equal elements may change depending on the sequence).
+
+Each sorting algorithm has its own strengths and weaknesses, which make them suitable for different scenarios depending on factors like dataset size, data distribution, stability requirements, and available memory.
 
 
-### Examples for Clarification:
+### Examples for passes for Clarification:
 
 - **Selection Sort Example**:
   - Array: \[7, 6, 4, 3, 1\]
