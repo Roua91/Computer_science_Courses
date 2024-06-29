@@ -257,3 +257,69 @@ $\[
 - Cluster 2 $(\( \mu_2 \))$: $\( x_3, x_4, x_5, x_6 \)$
 
 This example shows the step-by-step calculations involved in the K-Means clustering process.
+
+
+
+
+# K-Means Clustering Example
+
+## Data Points
+| Point | x1 | x2 |
+|-------|----|----|
+| x1    | 2  | 3  |
+| x2    | 3  | 3  |
+| x3    | 6  | 8  |
+| x4    | 8  | 8  |
+| x5    | 7  | 9  |
+| x6    | 9  | 7  |
+
+## Initial Centroids
+- **Centroid 1 (μ1):** (2, 3)
+- **Centroid 2 (μ2):** (9, 7)
+
+## Steps
+
+### Step 1: Initialize Centroids
+- μ1 = (2, 3)
+- μ2 = (9, 7)
+
+### Step 2: Assign Data Points to Closest Centroid
+For each data point, calculate the Euclidean distance to each centroid and assign to the nearest centroid.
+
+| Point | Distance to μ1 | Distance to μ2 | Assigned to |
+|-------|----------------|----------------|-------------|
+| x1    | 0              | √65            | μ1          |
+| x2    | 1              | √52            | μ1          |
+| x3    | √41            | √10            | μ2          |
+| x4    | √61            | √2             | μ2          |
+| x5    | √61            | √8             | μ2          |
+| x6    | √65            | 0              | μ2          |
+
+### Step 3: Recompute Centroids
+Recompute the centroids based on current assignments.
+
+- New μ1: (2.5, 3)
+- New μ2: (7.5, 8)
+
+### Step 4: Repeat Assignment and Update
+Reassign data points and recompute centroids until convergence.
+
+| Point | Distance to new μ1 | Distance to new μ2 | Assigned to |
+|-------|---------------------|--------------------|-------------|
+| x1    | 0.5                 | √55.25             | μ1          |
+| x2    | 0.5                 | √45.25             | μ1          |
+| x3    | √37.25              | 1.5                | μ2          |
+| x4    | √55.25              | 0.5                | μ2          |
+| x5    | √56.25              | √1.25              | μ2          |
+| x6    | √58.25              | √3.25              | μ2          |
+
+Since the centroids did not change, the algorithm has converged.
+
+### Final Result
+- **Centroid 1 (μ1):** (2.5, 3)
+- **Centroid 2 (μ2):** (7.5, 8)
+
+### Cluster Assignments
+- **Cluster 1 (μ1):** x1, x2
+- **Cluster 2 (μ2):** x3, x4, x5, x6
+
