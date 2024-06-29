@@ -165,11 +165,8 @@ Assign $\( x_6 \) to \( \mu_2 \)$.
 ### Step 3: Recompute Centroids
 Recompute the centroids based on the current assignments.
 
-New $\( \mu_1 \)$:
-$\[\mu_1 = \frac{1}{2} \begin{pmatrix} 2 + 3 \\ 3 + 3 \end{pmatrix} = \begin{pmatrix} 2.5 \\ 3 \end{pmatrix}\]$
+![image](https://github.com/Roua91/Computer_science_Courses/assets/165356652/faf058d6-19e4-4b67-acc7-a2a1cb13927b)
 
-New $\( \mu_2 \)$:
-$\[\mu_2 = \frac{1}{4} \begin{pmatrix} 6 + 8 + 7 + 9 \\ 8 + 8 + 9 + 7 \end{pmatrix} = \begin{pmatrix} 7.5 \\ 8 \end{pmatrix}\]$
 
 - New μ1: (2.5, 3)
 - New μ2: (7.5, 8)
@@ -246,17 +243,7 @@ Since the centroids did not change, the algorithm has converged.
 
 **Recompute Centroids:**
 
-New $\( \mu_1 \)$:
-$\[
-\mu_1 = \frac{1}{2} \begin{pmatrix} 2 + 3 \\ 3 + 3 \end{pmatrix} = \begin{pmatrix} 2.5 \\ 3 \end{pmatrix}
-\]$
-
-New $\( \mu_2 \)$:
-$\[
-\mu_2 = \frac{1}{4} \begin{pmatrix} 6 + 8 + 
-
-7 + 9 \\ 8 + 8 + 9 + 7 \end{pmatrix} = \begin{pmatrix} 7.5 \\ 8 \end{pmatrix}
-\]$
+![image](https://github.com/Roua91/Computer_science_Courses/assets/165356652/50488c0a-2bb5-4794-af54-c4ebf6466796)
 
 Since the centroids did not change, the algorithm has converged.
 
