@@ -72,31 +72,31 @@ K-Means is widely used in various fields, including:
 - Anomaly detection.
 
 
-### Example Dataset
 
-Let's consider a small 2D dataset with 6 data points:
 
-$\[
-X = \begin{pmatrix}
-2 & 3 \\
-3 & 3 \\
-6 & 8 \\
-8 & 8 \\
-7 & 9 \\
-9 & 7 \\
-\end{pmatrix}
-\]$
+# K-Means Clustering Example
 
-We'll use $\( K = 2 \$) clusters for this example.
+## Data Points
+| Point | x1 | x2 |
+|-------|----|----|
+| x1    | 2  | 3  |
+| x2    | 3  | 3  |
+| x3    | 6  | 8  |
+| x4    | 8  | 8  |
+| x5    | 7  | 9  |
+| x6    | 9  | 7  |
+
+## Initial Centroids
+- **Centroid 1 (μ1):** (2, 3)
+- **Centroid 2 (μ2):** (9, 7)
+
+## Steps
 
 ### Step 1: Initialize Centroids
-
-We'll randomly choose 2 data points as the initial centroids. Let's select the first and the last data points for simplicity:
-
-$mu_1 = \begin{pmatrix} 2 \\ 3 \end{pmatrix}, \quad \mu_2 = \begin{pmatrix} 9 \\ 7 \end{pmatrix}$
+- μ1 = (2, 3)
+- μ2 = (9, 7)
 
 ### Step 2: Assign Data Points to Closest Centroid
-
 Calculate the Euclidean distance between each data point and the centroids. Assign each point to the nearest centroid.
 
 For $\( x_1 = (2, 3) \)$:
@@ -153,22 +153,28 @@ d(x_6, \mu_2) = \sqrt{(9-9)^2 + (7-7)^2} = 0
 \]$
 Assign $\( x_6 \) to \( \mu_2 \)$.
 
-### Step 3: Recompute Centroids
+| Point | Distance to μ1 | Distance to μ2 | Assigned to |
+|-------|----------------|----------------|-------------|
+| x1    | 0              | √65            | μ1          |
+| x2    | 1              | √52            | μ1          |
+| x3    | √41            | √10            | μ2          |
+| x4    | √61            | √2             | μ2          |
+| x5    | √61            | √8             | μ2          |
+| x6    | √65            | 0              | μ2          |
 
+### Step 3: Recompute Centroids
 Recompute the centroids based on the current assignments.
 
 New $\( \mu_1 \)$:
-$\[
-\mu_1 = \frac{1}{2} \begin{pmatrix} 2 + 3 \\ 3 + 3 \end{pmatrix} = \begin{pmatrix} 2.5 \\ 3 \end{pmatrix}
-\]$
+$\[\mu_1 = \frac{1}{2} \begin{pmatrix} 2 + 3 \\ 3 + 3 \end{pmatrix} = \begin{pmatrix} 2.5 \\ 3 \end{pmatrix}\]$
 
 New $\( \mu_2 \)$:
-$\[
-\mu_2 = \frac{1}{4} \begin{pmatrix} 6 + 8 + 7 + 9 \\ 8 + 8 + 9 + 7 \end{pmatrix} = \begin{pmatrix} 7.5 \\ 8 \end{pmatrix}
-\]$
+$\[\mu_2 = \frac{1}{4} \begin{pmatrix} 6 + 8 + 7 + 9 \\ 8 + 8 + 9 + 7 \end{pmatrix} = \begin{pmatrix} 7.5 \\ 8 \end{pmatrix}\]$
+
+- New μ1: (2.5, 3)
+- New μ2: (7.5, 8)
 
 ### Step 4: Repeat Assignment and Update
-
 Repeat the assignment step with the new centroids and recompute until convergence.
 
 **Assignment:**
@@ -227,6 +233,17 @@ d(x_6, \mu_2) = \sqrt{(9-7.5)^2 + (7-8)^2} = \sqrt{2.25 + 1} = \sqrt{3.25}
 \]$
 Assign $\( x_6 \) to \( \mu_2 \)$.
 
+| Point | Distance to new μ1 | Distance to new μ2 | Assigned to |
+|-------|---------------------|--------------------|-------------|
+| x1    | 0.5                 | √55.25             | μ1          |
+| x2    | 0.5                 | √45.25             | μ1          |
+| x3    | √37.25              | 1.5                | μ2          |
+| x4    | √55.25              | 0.5                | μ2          |
+| x5    | √56.25              | √1.25              | μ2          |
+| x6    | √58.25              | √3.25              | μ2          |
+
+Since the centroids did not change, the algorithm has converged.
+
 **Recompute Centroids:**
 
 New $\( \mu_1 \)$:
@@ -243,77 +260,6 @@ $\[
 
 Since the centroids did not change, the algorithm has converged.
 
-### Final Result
-
-**Centroids:**
-
-$\[
-\mu_1 = \begin{pmatrix} 2.5 \\ 3 \end{pmatrix}, \quad \mu_2 = \begin{pmatrix} 7.5 \\ 8 \end{pmatrix}
-\]$
-
-**Cluster Assignments:**
-
-- Cluster 1 $(\( \mu_1 \))$: $\( x_1, x_2 \)$
-- Cluster 2 $(\( \mu_2 \))$: $\( x_3, x_4, x_5, x_6 \)$
-
-This example shows the step-by-step calculations involved in the K-Means clustering process.
-
-
-
-
-# K-Means Clustering Example
-
-## Data Points
-| Point | x1 | x2 |
-|-------|----|----|
-| x1    | 2  | 3  |
-| x2    | 3  | 3  |
-| x3    | 6  | 8  |
-| x4    | 8  | 8  |
-| x5    | 7  | 9  |
-| x6    | 9  | 7  |
-
-## Initial Centroids
-- **Centroid 1 (μ1):** (2, 3)
-- **Centroid 2 (μ2):** (9, 7)
-
-## Steps
-
-### Step 1: Initialize Centroids
-- μ1 = (2, 3)
-- μ2 = (9, 7)
-
-### Step 2: Assign Data Points to Closest Centroid
-For each data point, calculate the Euclidean distance to each centroid and assign to the nearest centroid.
-
-| Point | Distance to μ1 | Distance to μ2 | Assigned to |
-|-------|----------------|----------------|-------------|
-| x1    | 0              | √65            | μ1          |
-| x2    | 1              | √52            | μ1          |
-| x3    | √41            | √10            | μ2          |
-| x4    | √61            | √2             | μ2          |
-| x5    | √61            | √8             | μ2          |
-| x6    | √65            | 0              | μ2          |
-
-### Step 3: Recompute Centroids
-Recompute the centroids based on current assignments.
-
-- New μ1: (2.5, 3)
-- New μ2: (7.5, 8)
-
-### Step 4: Repeat Assignment and Update
-Reassign data points and recompute centroids until convergence.
-
-| Point | Distance to new μ1 | Distance to new μ2 | Assigned to |
-|-------|---------------------|--------------------|-------------|
-| x1    | 0.5                 | √55.25             | μ1          |
-| x2    | 0.5                 | √45.25             | μ1          |
-| x3    | √37.25              | 1.5                | μ2          |
-| x4    | √55.25              | 0.5                | μ2          |
-| x5    | √56.25              | √1.25              | μ2          |
-| x6    | √58.25              | √3.25              | μ2          |
-
-Since the centroids did not change, the algorithm has converged.
 
 ### Final Result
 - **Centroid 1 (μ1):** (2.5, 3)
