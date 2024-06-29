@@ -93,9 +93,7 @@ We'll use $\( K = 2 \$) clusters for this example.
 
 We'll randomly choose 2 data points as the initial centroids. Let's select the first and the last data points for simplicity:
 
-$\[
-\mu_1 = \begin{pmatrix} 2 \\ 3 \end{pmatrix}, \quad \mu_2 = \begin{pmatrix} 9 \\ 7 \end{pmatrix}
-\]$
+$\mu_1 = \begin{pmatrix} 2 \\ 3 \end{pmatrix}, \quad \mu_2 = \begin{pmatrix} 9 \\ 7 \end{pmatrix}\$
 
 ### Step 2: Assign Data Points to Closest Centroid
 
