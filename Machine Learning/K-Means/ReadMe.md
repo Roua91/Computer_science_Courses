@@ -43,21 +43,6 @@ K-Means is one of the simplest and most popular unsupervised machine learning al
    - Repeat the assignment and update steps until the centroids no longer move significantly or the algorithm reaches a predetermined number of iterations.
    - Convergence can be checked by measuring the changes in the centroids or the overall clustering cost.
 
-### Example
-
-1. **Initialization**:
-   - Suppose we have a set of data points in a 2D space, and we want to cluster them into \( k = 2 \) clusters.
-   - Randomly choose two initial centroids.
-
-2. **Assignment Step**:
-   - Calculate the distance of each data point to the two centroids.
-   - Assign each data point to the nearest centroid.
-
-3. **Update Step**:
-   - Compute the new centroids by taking the mean of the data points assigned to each cluster.
-
-4. **Repeat**:
-   - Repeat the assignment and update steps until the centroids stabilize.
 
 ### Considerations
 
@@ -86,7 +71,6 @@ K-Means is widely used in various fields, including:
 - Document clustering.
 - Anomaly detection.
 
-Sure, let's go through a step-by-step example of applying and calculating K-means mathematically with a small dataset. We'll manually compute the steps to better understand the process.
 
 ### Example Dataset
 
