@@ -1,5 +1,4 @@
-# Data Structures and Algorithm Analysis
-## Topic 6: Lists
+#Lists
 
 ### Introduction to Lists
 - Lists are popular data structures used to store data in sequential order.
