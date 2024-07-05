@@ -13,4 +13,4 @@
 | **Heap**       | O(n)        | O(n)        | O(log n)       | O(log n)      | O(n)             | Priority queues, Order statistics | Efficient priority operations | No efficient search |
 | **Graph**      | O(V+E)      | O(V+E)      | O(V+E)         | O(V+E)        | O(V+E)           | Network connections, Pathfinding | Versatile, Represents complex relationships | Complex algorithms, Memory intensive |
 | **Trie**       | O(m)        | O(m)        | O(m)           | O(m)          | O(n)             | Prefix searches, Auto-completion | Fast search, insertion, deletion | Large memory usage |
-| **Bloom Filter**| O(1)       | O(1)        | O(1)           | N/A           | O(n)             | Probabilistic set membership | Space-efficient, Fast | False positives, No deletions |
+| 
