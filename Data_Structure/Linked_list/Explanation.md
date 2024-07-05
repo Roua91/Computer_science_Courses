@@ -1,4 +1,4 @@
-#Lists
+# Lists
 
 ### Introduction to Lists
 - Lists are popular data structures used to store data in sequential order.
