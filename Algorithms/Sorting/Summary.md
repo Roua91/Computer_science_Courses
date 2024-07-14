@@ -3,7 +3,7 @@
 
 | Sorting Algorithm | Worst Case Complexity | Best Case Complexity | Stability | Use of Recursion | Additional Notes |
 |--------------------|-----------------------|----------------------|-----------|------------------|------------------|
-| Selection Sort     | $\( O(n^2) \)$           | $\( O(n^2) \)$          | Not Stable | Iterative        | Simple and inefficient on large lists. |
+| Selection Sort     | $( O(n^2) \)$           | $\( O(n^2) \)$          | Not Stable | Iterative        | Simple and inefficient on large lists. |
 | Insertion Sort     | $\( O(n^2) \)$           | $\( O(n) \)$            | Stable    | Iterative        | Efficient for small data sets or nearly sorted data. |
 | Quick Sort         | $\( O(n^2) \)$ (worst), $\( O(n \log n) \)$ (avg) | $\( O(n \log n) \)$     | Not Stable | Recursive        | Efficient for large datasets; worst case can be mitigated with good pivot selection. |
 | Merge Sort         | $\( O(n \log n) \)$      | $\( O(n \log n) \)$     | Stable    | Recursive        | Uses additional space proportional to input size for merging. |
