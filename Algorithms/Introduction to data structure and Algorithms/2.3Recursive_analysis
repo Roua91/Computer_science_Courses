@@ -1,0 +1,129 @@
+time complexity of some popular recursive functions along with justifications for each:
+
+### 1. Factorial Function
+#### Definition:
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n-1)
+```
+#### Time Complexity: O(n)
+#### Justification:
+- Each call to `factorial(n)` results in exactly one additional recursive call to `factorial(n-1)`.
+- The recursion proceeds until `n` is decremented to 0, resulting in `n` recursive calls.
+- Therefore, the time complexity is O(n).
+
+### 2. Fibonacci Function
+#### Definition:
+```python
+def fibonacci(n):
+    if n <= 1:
+        return n
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+```
+#### Time Complexity: O(2^n)
+#### Justification:
+- Each call to `fibonacci(n)` results in two additional recursive calls: `fibonacci(n-1)` and `fibonacci(n-2)`.
+- This creates a binary tree of calls, where the height of the tree is `n` and the number of nodes is exponential in `n`.
+- Specifically, the number of calls grows as O(2^n), leading to the exponential time complexity.
+
+### 3. Merge Sort
+#### Definition:
+```python
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        i = j = k = 0
+
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
+```
+#### Time Complexity: O(n log n)
+#### Justification:
+- The array is recursively divided into two halves, leading to a log n division depth (since the array size is halved each time).
+- Merging the halves requires linear time in the size of the array.
+- Combining these, we get a total time complexity of O(n log n).
+
+### 4. Tower of Hanoi
+#### Definition:
+```python
+def tower_of_hanoi(n, source, target, auxiliary):
+    if n == 1:
+        print("Move disk 1 from source", source, "to target", target)
+        return
+    tower_of_hanoi(n-1, source, auxiliary, target)
+    print("Move disk", n, "from source", source, "to target", target)
+    tower_of_hanoi(n-1, auxiliary, target, source)
+```
+#### Time Complexity: O(2^n)
+#### Justification:
+- Each call to `tower_of_hanoi(n)` results in two additional recursive calls: `tower_of_hanoi(n-1, source, auxiliary, target)` and `tower_of_hanoi(n-1, auxiliary, target, source)`.
+- This creates an exponential number of recursive calls.
+- Specifically, the recurrence relation is T(n) = 2T(n-1) + O(1), which solves to O(2^n).
+
+### 5. Quick Sort
+#### Definition:
+```python
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    else:
+        pivot = arr[len(arr) // 2]
+        left = [x for x in arr if x < pivot]
+        middle = [x for x in arr if x == pivot]
+        right = [x for x in arr if x > pivot]
+        return quick_sort(left) + middle + quick_sort(right)
+```
+#### Time Complexity:
+- Average Case: O(n log n)
+- Worst Case: O(n^2)
+
+#### Justification:
+- The array is partitioned around a pivot element, ideally resulting in two halves of roughly equal size.
+- The depth of recursion is log n if the array is evenly split each time.
+- The partitioning process takes linear time.
+- In the worst case, if the pivot divides the array into two highly unbalanced parts (e.g., one element and the rest), the depth of recursion can be linear, leading to O(n^2) complexity.
+
+### 6. Binary Search
+#### Definition:
+```python
+def binary_search(arr, target, low, high):
+    if low > high:
+        return -1
+    mid = (low + high) // 2
+    if arr[mid] == target:
+        return mid
+    elif arr[mid] < target:
+        return binary_search(arr, target, mid + 1, high)
+    else:
+        return binary_search(arr, target, low, mid - 1)
+```
+#### Time Complexity: O(log n)
+#### Justification:
+- Each call to `binary_search` halves the search interval.
+- Therefore, the depth of recursion is log n, leading to a logarithmic time complexity.
