@@ -1,0 +1,135 @@
+---
+
+
+---
+
+# **R Basics** 
+
+## **Section 1 Overview**
+
+Section 1 introduces you to R Basics, Functions and Datatypes.\
+In Section 1, you will learn to:
+
+-   Appreciate the rationale for data analysis using R
+
+-   Define objects and perform basic arithmetic and logical operations
+
+-   Use pre-defined functions to perform operations on objects
+
+-   Distinguish between various data types
+
+### **Assessment 1**
+
+1.  What is the sum of the first n positive integers? The formula for the sum of integers 1 through n is n(n+1)/2. Define n = 100 and then use R to compute the sum of 1 through 100 using the formula. What is the sum?
+
+```{r}
+n <- 100
+n*(n+1)/2
+```
+
+2.  Now use the same formula to compute the sum of the integers from 1 through 1,000.
+
+```{r}
+n <- 1000
+n*(n+1)/2
+```
+
+3.  Look at the result of typing the following code into R:
+
+> n \<- 1000\
+> x \<- seq(1, n)\
+> sum(x)
+
+```{r}
+n <- 1000
+x <- seq(1, n)
+sum(x)
+```
+
+Based on the result, what do you think the functions seq and sum do?\
+A. sum creates a list of numbers and seq adds them up.
+
+`B. seq creates a list of numbers and sum adds them up.`
+
+C. seq computes the difference between two arguments and sum computes the sum of 1 through 1000.
+
+D. sum always returns the same number.
+
+4.  In math and programming, we say that we evaluate a function when we replace the argument with a given number. So if we type sqrt(4), we evaluate the sqrt function. In R, you can evaluate a function inside another function. The evaluations happen from the inside out. Use one line of code to compute the log, in base 10, of the square root of 100.
+
+```{r}
+log10(sqrt(100))
+```
+
+5.  Which of the following will always return the numeric value stored in x? You can try out examples and use the help system if you want.
+
+A. log(10\^x)
+
+B. log10(x\^10)
+
+`C. log(exp(x))`
+
+D. exp(log(x, base = 2))
+
+### **Assessment 2**
+
+1.  Load the US murders dataset.
+
+    ```{r}
+    library(dslabs)
+    data(murders)
+    ```
+
+Use the function str to examine the structure of the murders object. We can see that this object is a data frame with 51 rows and five columns. Which of the following best describes the variables represented in this data frame?\
+A. The 51 states.
+
+B. The murder rates for all 50 states and DC.
+
+`C. The state name, the abbreviation of the state name, the state's region, and the state's population and total number of murders for 2010.`
+
+D. str shows no relevant information.
+
+2.  What are the column names used by the data frame for these five variables?
+
+    ```{r}
+    names(murders)
+    ```
+
+3.  Use the accessor \$ to extract the state abbreviations and assign them to the object a. What is the class of this object?
+
+    ```{r}
+    a <- murders$abb
+
+    class(a)
+    ```
+
+4.  Now use the square brackets to extract the state abbreviations and assign them to the object b. Use the identical function to determine if a and b are the same.
+
+    ```{r}
+    b<-murders[["abb"]]
+
+    # Check if `a` and `b` are identical 
+    identical(a, b)
+    ```
+
+5.  We saw that the region column stores a factor. You can corroborate this by typing:
+
+> class(murders\$region)
+
+With one line of code, use the function levels and length to determine the number of regions defined by this dataset.
+
+```{r}
+length(levels(murders$region))
+```
+
+6.  The function table takes a vector and returns the frequency of each element. You can quickly see how many states are in each region by applying this function. Use this function in one line of code to create a table of states per region.
+
+    ```{r}
+    x <-c("a", "a", "a", "b", "b", "c", "c", "c")
+
+    table(x)
+    ```
+
+    ```{r}
+    table(murders$region)
+    ```
