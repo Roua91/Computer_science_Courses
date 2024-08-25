@@ -1,0 +1,195 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Week 3:
+
+# Part1: Import and export Data
+
+**Check the working directory**
+
+```{r}
+getwd()
+```
+
+**Set the working directory**
+
+```{r}
+setwd("C:/Users/acer/Desktop/Fifth_Semester/Statistical_programming")
+
+```
+
+**read.table() function used to read csv**
+
+```{r}
+ABC <- read.table(file= "iris_dirty.csv", header=TRUE, sep= ",")
+```
+
+**read.csv() function used to read csv too**
+
+```{r}
+ABC <- read.csv("iris_dirty.csv")
+```
+
+```{r}
+#The result is a data.frame
+class(ABC)
+```
+
+**help information using**
+
+```{r}
+# a help function to find the data directory
+file.choose(new=FALSE)
+```
+
+```{r}
+#to get an explination about the certain function use ?
+?read.table
+```
+
+**Importing a library**
+
+```{r}
+library(readr)
+```
+
+**Importing \*.txt File**
+
+```{r}
+Mydata1 <- read.table("student_per.txt", sep="\t")
+
+Mydata1
+```
+
+```{r}
+Mydata2 <- read.delim("student_per.txt")
+Mydata2
+```
+
+**Importing data from a website**
+
+```{r}
+getLink <- "https://calmcode.io/static/data/fish.csv"
+Mydata <- read.table(file= getLink, header=TRUE, sep=",")
+Mydata
+```
+
+**Importing data from excel**
+
+```{r}
+library(readxl)
+excel_data <- read_excel()
+```
+
+**Homework:**
+
+Find the difference between csv, spss, and stata dataset
+
+**Importing data from a package**
+
+```{r}
+data(diamonds, package = 'ggplot2')
+head(diamonds)
+```
+
+## Part 2: Data Cleaning and Pre-processing
+
+**Data Validation steps:**
+
+-   Data loading
+
+-   Getting data summary
+
+-   perform data profiling
+
+```{r}
+data <- read.csv("iris_dirty.csv")
+data
+```
+
+```{r}
+summary(data)
+```
+
+```{r}
+library(DataExplorer)
+create_report(data)
+```
+
+**Removing Duplicates**
+
+```{r}
+iris_new <-unique(data)
+rownames(iris_new) <- 1:nrow(iris_new)
+sum(duplicated(iris_new))
+```
+
+```{r}
+cat("This is the old dirty iris dimention: ", dim(data), "\n")
+
+cat("This is the new iris data dimention", dim(iris_new), "\n")
+
+```
+
+**Encoding categorical value**
+
+**factor() or dummyVars():** to encode the values
+
+```{r}
+#make sure the data is speelled the same
+iris_new$Species <- tolower(iris_new$Species)
+
+#Change to category 
+iris_new$Species <- factor(iris_new$Species)
+
+iris_new$Species
+```
+
+```{r}
+levels(iris_new$Species)[as.integer(iris_new$Species)]
+levels(iris_new$Species)[1]<-"setosa"
+levels(iris_new$Species)[2]<-"versicolor"
+as.numeric(iris_new$Species)
+iris_new
+```
+
+**Missing data**
+
+**is.na() or complete.cases():** to identify and handle missing values
+
+```{r}
+#Handling the misisng data 
+#By replacing it with the mean
+iris_new$Sepal.Length[is.na(iris_new$Sepal.Length)] <-mean(iris_new$Sepal.Length, na.rm =TRUE)
+
+iris_new$Sepal.Width[is.na(iris_new$Sepal.Width)] <- mean(iris_new$Sepal.Width, na.rm= TRUE)
+
+sum(is.na(iris_new))
+```
+
+**Outlier Detection and Treatment**
+
+the use of boxplot, z-score, and mahalanobis distance
+
+```{r}
+iris_new <- subset(iris_new, select= -X) #Remove X column
+
+boxplot(iris_new)
+```
+
+```{r}
+#Deleting outliers
+Q1 <- quantile(iris_new$Sepal.Width, .25)
+Q3 <- quantile(iris_new$Sepal.Width, .75)
+
+IQR <- IQR(iris_new$Sepal.Width)
+```
+
+```{r}
+iris_final <- subset(iris, iris_new$Sepal.Width>(Q1-1.5*IQR)&
+                       iris_new$Sepal.Width<(Q3 + 1.5*IQR))
+
+boxplot(iris_final)
+```
