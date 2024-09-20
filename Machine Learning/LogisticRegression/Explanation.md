@@ -19,9 +19,9 @@ Before applying the logistic function, we compute a **linear combination** of th
 
 The linear combination of the features looks like this:
 
-\[
+$\[
 z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n
-\]
+\]$
 
 Here:
 - \( \beta_0 \) is the **bias** (a constant term).
