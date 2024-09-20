@@ -74,9 +74,9 @@ Gradient descent is an optimization algorithm that updates the parameters step b
 
 The update rule for the parameters is:
 
-$\
+$\[
 \beta_j := \beta_j - \alpha \frac{\partial J(\beta)}{\partial \beta_j}
-\$
+\]$
 
 Where:
 - $\( \alpha \)$ is the **learning rate**, a small positive number that controls how big the steps are.
