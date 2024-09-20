@@ -24,18 +24,18 @@ z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n
 \]$
 
 Here:
-- \( \beta_0 \) is the **bias** (a constant term).
-- \( \beta_1, \beta_2, \dots, \beta_n \) are the **weights** (parameters that the model learns).
-- \( x_1, x_2, \dots, x_n \) are the **input features** (e.g., age, income, or any other measurable data).
+- $\( \beta_0 \)$ is the **bias** (a constant term).
+- $\( \beta_1, \beta_2, \dots, \beta_n \)$ are the **weights** (parameters that the model learns).
+- $\( x_1, x_2, \dots, x_n \)$ are the **input features** (e.g., age, income, or any other measurable data).
 
 ### 4. **Logistic (Sigmoid) Function**
-The logistic function transforms the linear combination \( z \) into a **probability** value. This is where logistic regression gets its name.
+The logistic function transforms the linear combination $\( z \)$ into a **probability** value. This is where logistic regression gets its name.
 
 The logistic function is defined as:
 
-\[
+$\
 P(y = 1 | x) = \frac{1}{1 + e^{-z}}
-\]
+\$
 
 Where:
 - \( z \) is the linear combination we computed earlier.
@@ -45,7 +45,7 @@ The output of this function is always between 0 and 1, representing a probabilit
 
 ### 5. **Decision Boundary**
 To classify a new observation:
-- If the predicted probability **\( P(y = 1 | x) \)** is greater than **0.5**, we classify it as **class 1**.
+- If the predicted probability **$\( P(y = 1 | x) \)$** is greater than **0.5**, we classify it as **class 1**.
 - If the predicted probability is less than **0.5**, we classify it as **class 0**.
 
 This threshold can be adjusted, but 0.5 is the most common choice.
@@ -55,14 +55,14 @@ To train the model (i.e., to find the optimal values of \( \beta_0, \beta_1, \do
 
 For logistic regression, we use **cross-entropy** as the cost function:
 
-\[
+$\[
 J(\beta) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y^{(i)} \log(h_{\beta}(x^{(i)})) + (1 - y^{(i)}) \log(1 - h_{\beta}(x^{(i)})) \right]
-\]
+\]$
 
 Where:
-- \( m \) is the number of training examples.
-- \( y^{(i)} \) is the actual label for the \( i \)-th example (either 0 or 1).
-- \( h_{\beta}(x^{(i)}) \) is the predicted probability for the \( i \)-th example.
+- $\( m \)$ is the number of training examples.
+- $\( y^{(i)} \)$ is the actual label for the $\( i \)$-th example (either 0 or 1).
+- $\( h_{\beta}(x^{(i)}) \)$ is the predicted probability for the $\( i \)$-th example.
 - The summation is over all training examples.
 
 This cost function penalizes wrong predictions more heavily and ensures the model converges to the best set of parameters.
@@ -74,46 +74,46 @@ Gradient descent is an optimization algorithm that updates the parameters step b
 
 The update rule for the parameters is:
 
-\[
+$\
 \beta_j := \beta_j - \alpha \frac{\partial J(\beta)}{\partial \beta_j}
-\]
+\$
 
 Where:
-- \( \alpha \) is the **learning rate**, a small positive number that controls how big the steps are.
-- \( \frac{\partial J(\beta)}{\partial \beta_j} \) is the derivative of the cost function with respect to the parameter \( \beta_j \).
+- $\( \alpha \)$ is the **learning rate**, a small positive number that controls how big the steps are.
+- $\( \frac{\partial J(\beta)}{\partial \beta_j} \)$ is the derivative of the cost function with respect to the parameter $\( \beta_j \)$.
 
 This process is repeated until the cost function reaches its minimum.
 
 ### 8. **Partial Derivatives**
-To implement gradient descent, we need to compute the **gradients** (partial derivatives) of the cost function with respect to the parameters \( \beta_j \). Using calculus (specifically the **chain rule**), we derive the following:
+To implement gradient descent, we need to compute the **gradients** (partial derivatives) of the cost function with respect to the parameters $\( \beta_j \)$. Using calculus (specifically the **chain rule**), we derive the following:
 
-For the weights \( \beta_j \) (for \( j \geq 1 \)):
+For the weights $\( \beta_j \)$ (for $\( j \geq 1 \))$:
 
-\[
+$\
 \frac{\partial J(\beta)}{\partial \beta_j} = \frac{1}{m} \sum_{i=1}^{m} \left( h_{\beta}(x^{(i)}) - y^{(i)} \right) x_j^{(i)}
-\]
+\$
 
 For the bias term \( \beta_0 \):
 
-\[
+$\
 \frac{\partial J(\beta)}{\partial \beta_0} = \frac{1}{m} \sum_{i=1}^{m} \left( h_{\beta}(x^{(i)}) - y^{(i)} \right)
-\]
+\$
 
 ### 9. **Gradient Descent Update Rules**
 Using these derivatives, we can update the parameters during each step of gradient descent:
 
-\[
+$\
 \beta_j := \beta_j - \alpha \frac{1}{m} \sum_{i=1}^{m} \left( h_{\beta}(x^{(i)}) - y^{(i)} \right) x_j^{(i)}
-\]
+\$
 
-\[
+$\
 \beta_0 := \beta_0 - \alpha \frac{1}{m} \sum_{i=1}^{m} \left( h_{\beta}(x^{(i)}) - y^{(i)} \right)
-\]
+\$
 
 ### 10. **Generalizing for Multiple Training Examples**
 To handle multiple training examples at once, we vectorize our computations (using matrices instead of individual numbers). Let:
-- **\( X \)** be a matrix containing all training examples.
-- **\( \beta \)** be a vector of weights.
+- **$\( X \)$** be a matrix containing all training examples.
+- **$\( \beta \)$** be a vector of weights.
 
 Then, the linear combination for all training examples is:
 
