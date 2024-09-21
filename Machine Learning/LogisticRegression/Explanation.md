@@ -52,7 +52,7 @@ To train the model (i.e., to find the optimal values of \( \beta_0, \beta_1, \do
 
 For logistic regression, we use **cross-entropy** as the cost function:
 
-$J(\beta) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y^{(i)} \log(h_{\beta}(x^{(i)})) + (1 - y^{(i)}) \log(1 - h_{\beta}(x^{(i)})) \right\$
+$J(\beta) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y^{(i)} \log(h_{\beta}(x^{(i)})) + (1 - y^{(i)}) \log(1 - h_{\beta}(x^{(i)})) \right\ $
 
 Where:
 - $\( m \)$ is the number of training examples.
@@ -102,7 +102,7 @@ To handle multiple training examples at once, we vectorize our computations (usi
 
 Then, the linear combination for all training examples is:
 
-$z = X \beta\]$
+$z = X \beta\$
 
 And the predicted probabilities for all examples are:
 
