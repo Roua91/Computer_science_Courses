@@ -19,8 +19,7 @@ Before applying the logistic function, we compute a **linear combination** of th
 
 The linear combination of the features looks like this:
 
-$
-z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n\$
+$z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n\$
 
 Here:
 - $\( \beta_0 \)$ is the **bias** (a constant term).
@@ -35,8 +34,8 @@ The logistic function is defined as:
 $P(y = 1 | x) = \frac{1}{1 + e^{-z}}\$
 
 Where:
-- \( z \) is the linear combination we computed earlier.
-- \( e \) is the mathematical constant (approximately 2.718).
+- $\( z \)$ is the linear combination we computed earlier.
+- $\( e \)$ is the mathematical constant (approximately 2.718).
 
 The output of this function is always between 0 and 1, representing a probability.
 
@@ -52,7 +51,7 @@ To train the model (i.e., to find the optimal values of \( \beta_0, \beta_1, \do
 
 For logistic regression, we use **cross-entropy** as the cost function:
 
-$J(\beta) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y^{(i)} \log(h_{\beta}(x^{(i)})) + (1 - y^{(i)}) \log(1 - h_{\beta}(x^{(i)})) \right\ $
+$J(\beta) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y^{(i)} \log(h_{\beta}(x^{(i)})) + (1 - y^{(i)}) \log(1 - h_{\beta}(x^{(i)})) \right\)$
 
 Where:
 - $\( m \)$ is the number of training examples.
