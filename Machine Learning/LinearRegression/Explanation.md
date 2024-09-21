@@ -35,7 +35,8 @@ The difference between the actual and predicted values is called the **residual*
 $\text{Residual} = y - \hat{y}\$
 In linear regression, we want to minimize the **sum of squared residuals** or the **cost function**, which is commonly called the **Mean Squared Error (MSE)**:
 
-$MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2\$
+$$MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2\$$
+
 Where $\(n\)$ is the number of data points.
 
 The aim is to minimize this MSE by adjusting the coefficients \(\beta_0, \beta_1, \dots, \beta_n\).
