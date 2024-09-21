@@ -19,9 +19,8 @@ Before applying the logistic function, we compute a **linear combination** of th
 
 The linear combination of the features looks like this:
 
-$\[
-z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n
-\]$
+$
+z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n\$
 
 Here:
 - $\( \beta_0 \)$ is the **bias** (a constant term).
@@ -53,9 +52,7 @@ To train the model (i.e., to find the optimal values of \( \beta_0, \beta_1, \do
 
 For logistic regression, we use **cross-entropy** as the cost function:
 
-$\[
-J(\beta) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y^{(i)} \log(h_{\beta}(x^{(i)})) + (1 - y^{(i)}) \log(1 - h_{\beta}(x^{(i)})) \right]
-\]$
+$J(\beta) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y^{(i)} \log(h_{\beta}(x^{(i)})) + (1 - y^{(i)}) \log(1 - h_{\beta}(x^{(i)})) \right\$
 
 Where:
 - $\( m \)$ is the number of training examples.
@@ -72,9 +69,7 @@ Gradient descent is an optimization algorithm that updates the parameters step b
 
 The update rule for the parameters is:
 
-$\[
-\beta_j := \beta_j - \alpha \frac{\partial J(\beta)}{\partial \beta_j}
-\]$
+$\beta_j := \beta_j - \alpha \frac{\partial J(\beta)}{\partial \beta_j}\$
 
 Where:
 - $\( \alpha \)$ is the **learning rate**, a small positive number that controls how big the steps are.
@@ -87,9 +82,7 @@ To implement gradient descent, we need to compute the **gradients** (partial der
 
 For the weights $\( \beta_j \)$ (for $\( j \geq 1 \))$:
 
-$\
-\frac{\partial J(\beta)}{\partial \beta_j} = \frac{1}{m} \sum_{i=1}^{m} \left( h_{\beta}(x^{(i)}) - y^{(i)} \right) x_j^{(i)}
-\$
+$\frac{\partial J(\beta)}{\partial \beta_j} = \frac{1}{m} \sum_{i=1}^{m} \left( h_{\beta}(x^{(i)}) - y^{(i)} \right) x_j^{(i)}\$
 
 For the bias term \( \beta_0 \):
 
@@ -100,13 +93,9 @@ $\
 ### 9. **Gradient Descent Update Rules**
 Using these derivatives, we can update the parameters during each step of gradient descent:
 
-$\
-\beta_j := \beta_j - \alpha \frac{1}{m} \sum_{i=1}^{m} \left( h_{\beta}(x^{(i)}) - y^{(i)} \right) x_j^{(i)}
-\$
+$\beta_j := \beta_j - \alpha \frac{1}{m} \sum_{i=1}^{m} \left( h_{\beta}(x^{(i)}) - y^{(i)} \right) x_j^{(i)}\$
 
-$\
-\beta_0 := \beta_0 - \alpha \frac{1}{m} \sum_{i=1}^{m} \left( h_{\beta}(x^{(i)}) - y^{(i)} \right)
-\$
+$\beta_0 := \beta_0 - \alpha \frac{1}{m} \sum_{i=1}^{m} \left( h_{\beta}(x^{(i)}) - y^{(i)} \right)\$
 
 ### 10. **Generalizing for Multiple Training Examples**
 To handle multiple training examples at once, we vectorize our computations (using matrices instead of individual numbers). Let:
@@ -115,15 +104,11 @@ To handle multiple training examples at once, we vectorize our computations (usi
 
 Then, the linear combination for all training examples is:
 
-\[
-z = X \beta
-\]
+$z = X \beta\]$
 
 And the predicted probabilities for all examples are:
 
-\[
-h_{\beta}(X) = \frac{1}{1 + e^{-X \beta}}
-\]
+$h_{\beta}(X) = \frac{1}{1 + e^{-X \beta}}\$
 
 This allows us to perform efficient computation using matrix operations, especially when we have large datasets.
 
