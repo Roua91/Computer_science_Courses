@@ -1,5 +1,5 @@
 
-### 1. Linear Regression Introduction**
+### **1. Linear Regression Introduction**
 
 Linear regression is a statistical method used to model the relationship between a dependent variable (often called the target or response) and one or more independent variables (called predictors or features). The goal is to find the best-fitting line (or hyperplane in higher dimensions) that predicts the dependent variable based on the independent variables.
 
@@ -60,6 +60,7 @@ Where:
 
 $$\beta_0 = \bar{y} - \beta_1 \bar{x}\$$
 
+\
 #### For **multiple linear regression**, we use matrix algebra:
 Let:
 
@@ -77,14 +78,13 @@ Where:
 
 This equation provides the values of $\(\beta_0, \beta_1, \dots, \beta_n\)$.
 
-
+\\
 
 ### **5. Assess the Model**
 
 Once the coefficients are computed, the next step is to assess the quality of the model. Some common metrics include:
 
 - **R-squared**: Measures the proportion of the variance in the dependent variable that is predictable from the independent variables:
-
 $$R^2 = 1 - \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{\sum_{i=1}^n (y_i - \bar{y})^2}\$$
   
 - **Adjusted R-squared**: Adjusts $\(R^2\)$ for the number of predictors in the model.
