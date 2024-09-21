@@ -33,9 +33,7 @@ The logistic function transforms the linear combination $\( z \)$ into a **proba
 
 The logistic function is defined as:
 
-$\
-P(y = 1 | x) = \frac{1}{1 + e^{-z}}
-\$
+$\P(y = 1 | x) = \frac{1}{1 + e^{-z}}\$
 
 Where:
 - \( z \) is the linear combination we computed earlier.
