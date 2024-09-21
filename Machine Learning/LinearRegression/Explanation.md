@@ -4,7 +4,8 @@
 Linear regression is a statistical method used to model the relationship between a dependent variable (often called the target or response) and one or more independent variables (called predictors or features). The goal is to find the best-fitting line (or hyperplane in higher dimensions) that predicts the dependent variable based on the independent variables.
 
 For **simple linear regression** (one independent variable), the equation of the line is:
-$y = \beta_0 + \beta_1 x + \epsilon\$
+$$y = \beta_0 + \beta_1 x + \epsilon\$$
+
 - $\(y\)$: Dependent variable (target or outcome)
 - $\(x\)$: Independent variable (predictor or feature)
 - $\(\beta_0\)$: Intercept (the value of \(y\) when \(x = 0\))
@@ -13,15 +14,15 @@ $y = \beta_0 + \beta_1 x + \epsilon\$
 
 For **multiple linear regression** (multiple independent variables), the equation extends to:
 
-$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon\$
+$$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon\$$
 
 
 
 ### **2. Calculate the Predicted Values**
 
-The model predicts \( \hat{y} \) (the estimate of \( y \)) for a given set of inputs \(x_1, x_2, ..., x_n\) using the formula:
+The model predicts $\( \hat{y} \)$ (the estimate of \( y \)) for a given set of inputs $\(x_1, x_2, ..., x_n\)$ using the formula:
 
-$\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n\$
+$$\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n\$$
 
 Our goal is to determine the values of the coefficients $(\(\beta_0, \beta_1, \dots, \beta_n\))$ that minimize the difference between the predicted values $(\(\hat{y}\))$ and the actual values $(\(y\))$.
 
@@ -47,9 +48,9 @@ The aim is to minimize this MSE by adjusting the coefficients \(\beta_0, \beta_1
 
 The most common method for solving linear regression is **Ordinary Least Squares (OLS)**. Using OLS, we find the coefficients that minimize the MSE.
 
-#### For **simple linear regression**, the formulas for \(\beta_0\) and \(\beta_1\) are:
+#### For **simple linear regression**, the formulas for $\(\beta_0\)$ and $\(\beta_1\)$ are:
 
-$\beta_1 = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}\$
+$$\beta_1 = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}\$$
 
 
 Where:
@@ -57,7 +58,7 @@ Where:
 - $\(\bar{x}\)$ and $\(\bar{y}\)$ are the means of $\(x\)$ and $\(y\)$.
 
 
-$\beta_0 = \bar{y} - \beta_1 \bar{x}\$
+$$\beta_0 = \bar{y} - \beta_1 \bar{x}\$$
 
 #### For **multiple linear regression**, we use matrix algebra:
 Let:
@@ -68,7 +69,7 @@ Where $\(m\)$ is the number of observations, and $\(n\)$ is the number of featur
 
 The **OLS solution** is derived as:
 
-$\boldsymbol{\beta} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}\$
+$$\boldsymbol{\beta} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}\$$
 
 Where:
 - $\(\mathbf{X}^T\)$ is the transpose of the matrix $\(\mathbf{X}\)$.
@@ -83,8 +84,8 @@ This equation provides the values of $\(\beta_0, \beta_1, \dots, \beta_n\)$.
 Once the coefficients are computed, the next step is to assess the quality of the model. Some common metrics include:
 
 - **R-squared**: Measures the proportion of the variance in the dependent variable that is predictable from the independent variables:
-  
-  $R^2 = 1 - \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{\sum_{i=1}^n (y_i - \bar{y})^2}\$
+
+$$R^2 = 1 - \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{\sum_{i=1}^n (y_i - \bar{y})^2}\$$
   
 - **Adjusted R-squared**: Adjusts $\(R^2\)$ for the number of predictors in the model.
 
