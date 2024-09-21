@@ -86,9 +86,7 @@ $\frac{\partial J(\beta)}{\partial \beta_j} = \frac{1}{m} \sum_{i=1}^{m} \left( 
 
 For the bias term \( \beta_0 \):
 
-$\
-\frac{\partial J(\beta)}{\partial \beta_0} = \frac{1}{m} \sum_{i=1}^{m} \left( h_{\beta}(x^{(i)}) - y^{(i)} \right)
-\$
+$\frac{\partial J(\beta)}{\partial \beta_0} = \frac{1}{m} \sum_{i=1}^{m} \left( h_{\beta}(x^{(i)}) - y^{(i)} \right)\$
 
 ### 9. **Gradient Descent Update Rules**
 Using these derivatives, we can update the parameters during each step of gradient descent:
