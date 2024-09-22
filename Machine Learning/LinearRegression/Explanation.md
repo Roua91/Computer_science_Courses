@@ -182,10 +182,10 @@ To improve the model, especially when dealing with overfitting, you can use regu
 
 - **Ridge Regression**: Adds an $\(L2\)$ penalty to the cost function to penalize large coefficients:
   
-  $\text{Cost function} = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^{p} \beta_j^2\$
+  $${Cost function} = \sum_{i=1}^{n} (y_i - \hat{y}i)^2 + \lambda \sum{j=1}^{p} \beta_j^2$$
   
 - **Lasso Regression**: Adds an \(L1\) penalty, encouraging sparse models (many coefficients become zero):
-  \$\text{Cost function} = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^{p} |\beta_j|\$
+ $${Cost function} = \sum_{i=1}^{n} (y_i - \hat{y}i)^2 + \lambda \sum{j=1}^{p} |\beta_j|$$
 
 
 ---
