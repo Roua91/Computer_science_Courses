@@ -140,11 +140,11 @@ Cost functions are used during the training phase to **optimize** the model by m
 
 9. **Huber Loss**:
    
-   $$L_\delta(Y, \hat{Y}) = 
-   \begin{cases} 
-      \frac{1}{2} (Y - \hat{Y})^2 & \text{for } |Y - \hat{Y}| \leq \delta \\
-      \delta (|Y - \hat{Y}| - \frac{1}{2}\delta) & \text{for } |Y - \hat{Y}| > \delta
-   \end{cases}$$
+$$L_\delta(Y, \hat{Y}) =
+\begin{cases}
+\frac{1}{2} (Y - \hat{Y})^2 & \text{for } |Y - \hat{Y}| \leq \delta \\
+\delta (|Y - \hat{Y}| - \frac{1}{2}\delta) & \text{for } |Y - \hat{Y}| > \delta
+\end{cases}$$
    - Huber Loss combines **MSE** and **MAE**. It behaves like MSE for small errors and like MAE for large errors, making it robust to outliers.
 
 ### Summary of Cost Functions and Evaluation Metrics in Linear Regression:
