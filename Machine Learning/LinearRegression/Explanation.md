@@ -62,48 +62,106 @@ The aim is to minimize this MSE by adjusting the coefficients \(\beta_0, \beta_1
 
 
 
-### **4. Solving for Coefficients (Ordinary Least Squares)**
 
-The most common method for solving linear regression is **Ordinary Least Squares (OLS)**. Using OLS, we find the coefficients that minimize the MSE.
+### **4. Assess the Model**
 
-#### For **simple linear regression**, the formulas for $\(\beta_0\)$ and $\(\beta_1\)$ are:
+Once the model is fitted, it's important to evaluate how well it predicts the dependent variable. In **linear regression**, there are two main categories of functions that are crucial to the learning process: **evaluation metrics** and **cost functions** . Here's a breakdown of the different types in each category:
 
-$$\beta_1 = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}\$$
+### 1. **Evaluation Metrics** (Model Performance)
+
+Evaluation metrics are used after training to **assess the model’s performance** on unseen (test) data. They provide insights into how well the model generalizes to new data and help compare different models.
+
+#### **Common Evaluation Metrics in Linear Regression**:
+1. **Mean Squared Error (MSE)**:
+   
+   $$MSE = \frac{1}{n} \sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2$$
+   - Used both as a cost function during training and an evaluation metric.
+   - Measures the average squared difference between the actual and predicted values.
+
+2. **Root Mean Squared Error (RMSE)**:
+   
+   $$RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2}$$
+   - RMSE is often more interpretable than MSE since it’s in the same units as $\(Y\)$.
+   - Used as an evaluation metric to provide insight into the average prediction error.
+
+3. **Mean Absolute Error (MAE)**:
+   
+   $$MAE = \frac{1}{n} \sum_{i=1}^{n} |Y_i - \hat{Y}_i|$$
+   - Provides the average magnitude of prediction errors without considering their direction (positive or negative).
+   - Less sensitive to large errors than MSE and RMSE, making it a good choice when you want a more robust evaluation in the presence of outliers.
+
+4. **R-squared (\(R^2\))**:
+
+   $$R^2 = 1 - \frac{\sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2}{\sum_{i=1}^{n} (Y_i - \bar{Y})^2}$$
+   - Measures the proportion of variance in the dependent variable that is predictable from the independent variable(s).
+   - \(R^2\) ranges from 0 to 1, with higher values indicating a better fit. An $\(R^2\)$ value of 1 means the model perfectly predicts all data points, while 0 means it predicts nothing better than the mean of the data.
+
+5. **Adjusted R-squared**:
+   
+   $$\text{Adjusted } R^2 = 1 - \left(1 - R^2\right) \frac{n - 1}{n - k - 1}$$
+   - Adjusted \(R^2\) accounts for the number of predictors in the model and adjusts the $\(R^2\$) value to penalize models that have too many predictors (i.e., models that overfit).
+   - It is particularly useful when comparing models with different numbers of independent variables.
 
 
-Where:
-- $\(x_i\)$ and $\(y_i\)$ are individual data points.
-- $\(\bar{x}\)$ and $\(\bar{y}\)$ are the means of $\(x\)$ and $\(y\)$.
+---
 
+### **2. Cost Functions** (Optimization Objectives)
+Cost functions are used during the training phase to **optimize** the model by minimizing the error. They measure how well the model fits the training data. The goal is to minimize these cost functions to find the best-fitting parameters for the model.
 
-$$\beta_0 = \bar{y} - \beta_1 \bar{x}\$$
+#### **Common Cost Functions in Linear Regression**:
 
-\
-#### For **multiple linear regression**, we use matrix algebra:
-Let:
+1. **Sum of Squared Errors (SSE)**:
+   
+   $$SSE = \sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2$$
+   
+   - This is the **total** squared difference between the actual values \(Y_i\) and predicted values \(\hat{Y}_i\).
+   - Used as the objective function to minimize in Ordinary Least Squares (OLS).
 
-![image](https://github.com/user-attachments/assets/5c7050e7-3660-4e72-8999-16a55ee5339c)
+3. **Mean Squared Error (MSE)**:
+   
+   $$MSE = \frac{1}{n} \sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2$$
+   
+   - This is the **average** squared difference between the actual and predicted values.
+   - While it is often used as an evaluation metric (see below), it can also be used as a cost function to minimize in gradient-based optimization techniques.
 
-Where $\(m\)$ is the number of observations, and $\(n\)$ is the number of features (including a column of ones for the intercept term).
+5. **Root Mean Squared Error (RMSE)**:
+   
+   $$RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2}$$
+   
+   - RMSE is the square root of the MSE and provides a more interpretable measure of the average error in the same units as $\(Y\)$.
+   - Often used in practice as an evaluation metric, but can also be minimized as a cost function.
 
-The **OLS solution** is derived as:
+7. **Mean Absolute Error (MAE)**:
+   
+   $$MAE = \frac{1}{n} \sum_{i=1}^{n} |Y_i - \hat{Y}_i|$$
+   
+   - This is the average of the **absolute differences** between actual and predicted values.
+   - MAE is sometimes used as an alternative to MSE because it is less sensitive to large outliers.
 
-$$\boldsymbol{\beta} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}\$$
+9. **Huber Loss**:
+   
+   $$L_\delta(Y, \hat{Y}) = 
+   \begin{cases} 
+      \frac{1}{2} (Y - \hat{Y})^2 & \text{for } |Y - \hat{Y}| \leq \delta \\
+      \delta (|Y - \hat{Y}| - \frac{1}{2}\delta) & \text{for } |Y - \hat{Y}| > \delta
+   \end{cases}$$
+   - Huber Loss combines **MSE** and **MAE**. It behaves like MSE for small errors and like MAE for large errors, making it robust to outliers.
 
-Where:
-- $\(\mathbf{X}^T\)$ is the transpose of the matrix $\(\mathbf{X}\)$.
-- $\((\mathbf{X}^T \mathbf{X})^{-1}\)$ is the inverse of the product of $\(\mathbf{X}^T\)$ and $\(\mathbf{X}\)$.
+### Summary of Cost Functions and Evaluation Metrics in Linear Regression:
+1. **Evaluation Metrics** (Used to assess model performance on test data):
+   - Mean Squared Error (MSE)
+   - Root Mean Squared Error (RMSE)
+   - Mean Absolute Error (MAE)
+   - $\(R^2\)$ (Coefficient of Determination)
+   - Adjusted $\(R^2\)$
 
-This equation provides the values of $\(\beta_0, \beta_1, \dots, \beta_n\)$.
+2. **Cost Functions** (Used to minimize the error during training):
+   - Sum of Squared Errors (SSE)
+   - Mean Squared Error (MSE)
+   - Root Mean Squared Error (RMSE)
+   - Mean Absolute Error (MAE)
+   - Huber Loss
 
-\\
-
-### **5. Assess the Model**
-
-Once the model is fitted, it's important to evaluate how well it predicts the dependent variable. Common evaluation metrics include:
-- **R-squared (R²)**: The proportion of variance in the dependent variable that is explained by the independent variables.
-- **Adjusted R-squared**: Adjusts \( R² \) for the number of predictors in the model.
-- **Mean Squared Error (MSE)**: Measures the average of the squared errors between actual and predicted values
 
 
 
