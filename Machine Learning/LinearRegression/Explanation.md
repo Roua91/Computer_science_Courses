@@ -5,233 +5,34 @@ Linear regression is a statistical method used to model the relationship between
 
 The starting point for linear regression is the equation:
 
-𝑦
-=
-𝛽
-0
-+
-𝛽
-1
-𝑥
-+
-𝜖
-y=β 
-0
-​
- +β 
-1
-​
- x+ϵ
+
+$$y = \beta_0 + \beta_1 x + \epsilon$$
+
 Where:
+- $\(y\)$ is the dependent variable (the target we want to predict),
+- $\(x\)$ is the independent variable (the feature),
+- $\(\beta_0\)$ is the intercept (the value of \(y\) when \(x = 0\)),
+- $\(\beta_1\)$ is the slope (how much \(y\) changes for a unit change in \(x\)),
+- $\(\epsilon\)$ is the error term (the difference between the predicted and actual values).
 
-𝑦
-y is the dependent variable (the target we want to predict),
-𝑥
-x is the independent variable (the feature),
-𝛽
-0
-β 
-0
-​
-  is the intercept (the value of 
-𝑦
-y when 
-𝑥
-=
-0
-x=0),
-𝛽
-1
-β 
-1
-​
-  is the slope (how much 
-𝑦
-y changes for a unit change in 
-𝑥
-x),
-𝜖
-ϵ is the error term (the difference between the predicted and actual values).
-The goal is to find the best values for 
-𝛽
-0
-β 
-0
-​
-  and 
-𝛽
-1
-β 
-1
-​
-  (also known as parameters) so that the line best fits the data.
+The goal is to find the best values for $\(\beta_0\)$ and $\(\beta_1\)$ (also known as **parameters**) so that the line best fits the data.
 
-2. Parameter Estimation
-The most common way to find 
-𝛽
-0
-β 
-0
-​
-  and 
-𝛽
-1
-β 
-1
-​
-  is by using the Ordinary Least Squares (OLS) method. OLS aims to minimize the sum of squared differences between the observed values of 
-𝑦
-y and the values predicted by the model. These differences are called residuals.
+### 2. **Parameter Estimation**
+The most common way to find $\(\beta_0\)$ and $\(\beta_1\)$ is by using the **Ordinary Least Squares (OLS)** method. OLS aims to minimize the sum of squared differences between the observed values of $\(y\)$ and the values predicted by the model. These differences are called **residuals**.
 
 The formulas for estimating the parameters are derived by minimizing the squared residuals:
 
-𝛽
-1
-^
-=
-∑
-(
-𝑥
-𝑖
-−
-𝑥
-ˉ
-)
-(
-𝑦
-𝑖
-−
-𝑦
-ˉ
-)
-∑
-(
-𝑥
-𝑖
-−
-𝑥
-ˉ
-)
-2
-β 
-1
-​
- 
-^
-​
- = 
-∑(x 
-i
-​
- − 
-x
-ˉ
- ) 
-2
- 
-∑(x 
-i
-​
- − 
-x
-ˉ
- )(y 
-i
-​
- − 
-y
-ˉ
-​
- )
-​
- 
-𝛽
-0
-^
-=
-𝑦
-ˉ
-−
-𝛽
-1
-^
-𝑥
-ˉ
-β 
-0
-​
- 
-^
-​
- = 
-y
-ˉ
-​
- − 
-β 
-1
-​
- 
-^
-​
-  
-x
-ˉ
- 
-Where:
+$$\hat{\beta_1} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}$$
 
-𝛽
-1
-^
-β 
-1
-​
- 
-^
-​
-  and 
-𝛽
-0
-^
-β 
-0
-​
- 
-^
-​
-  are the estimated parameters,
-𝑥
-ˉ
-x
-ˉ
-  and 
-𝑦
-ˉ
-y
-ˉ
-​
-  are the mean values of 
-𝑥
-x and 
-𝑦
-y,
-𝑥
-𝑖
-x 
-i
-​
-  and 
-𝑦
-𝑖
-y 
-i
-​
-  are the individual data points.
-After calculating these values, you have an initial fitted line that describes the relationship between 
-𝑥
-x and 
-𝑦
-y.
+
+$$\hat{\beta_0} = \bar{y} - \hat{\beta_1} \bar{x}$$
+
+Where:
+- $\(\hat{\beta_1}\)$ and $\(\hat{\beta_0}\)$ are the estimated parameters,
+- $\(\bar{x}\) and \(\bar{y}\)$ are the mean values of $\(x\)$ and $\(y\)$,
+- $\(x_i\)$ and $\(y_i\)$ are the individual data points.
+
+After calculating these values, you have an initial **fitted line** that describes the relationship between \(x\) and \(y\).
 
 
 
