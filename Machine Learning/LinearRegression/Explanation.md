@@ -3,18 +3,235 @@
 
 Linear regression is a statistical method used to model the relationship between a dependent variable (often called the target or response) and one or more independent variables (called predictors or features). The goal is to find the best-fitting line (or hyperplane in higher dimensions) that predicts the dependent variable based on the independent variables.
 
-For **simple linear regression** (one independent variable), the equation of the line is:
-$$y = \beta_0 + \beta_1 x + \epsilon\$$
+The starting point for linear regression is the equation:
 
-- $\(y\)$: Dependent variable (target or outcome)
-- $\(x\)$: Independent variable (predictor or feature)
-- $\(\beta_0\)$: Intercept (the value of \(y\) when \(x = 0\))
-- $\(\beta_1\)$: Slope (rate of change of \(y\) with respect to \(x\))
-- $\(\epsilon\)$: Error term (difference between observed and predicted values)
+𝑦
+=
+𝛽
+0
++
+𝛽
+1
+𝑥
++
+𝜖
+y=β 
+0
+​
+ +β 
+1
+​
+ x+ϵ
+Where:
 
-For **multiple linear regression** (multiple independent variables), the equation extends to:
+𝑦
+y is the dependent variable (the target we want to predict),
+𝑥
+x is the independent variable (the feature),
+𝛽
+0
+β 
+0
+​
+  is the intercept (the value of 
+𝑦
+y when 
+𝑥
+=
+0
+x=0),
+𝛽
+1
+β 
+1
+​
+  is the slope (how much 
+𝑦
+y changes for a unit change in 
+𝑥
+x),
+𝜖
+ϵ is the error term (the difference between the predicted and actual values).
+The goal is to find the best values for 
+𝛽
+0
+β 
+0
+​
+  and 
+𝛽
+1
+β 
+1
+​
+  (also known as parameters) so that the line best fits the data.
 
-$$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon\$$
+2. Parameter Estimation
+The most common way to find 
+𝛽
+0
+β 
+0
+​
+  and 
+𝛽
+1
+β 
+1
+​
+  is by using the Ordinary Least Squares (OLS) method. OLS aims to minimize the sum of squared differences between the observed values of 
+𝑦
+y and the values predicted by the model. These differences are called residuals.
+
+The formulas for estimating the parameters are derived by minimizing the squared residuals:
+
+𝛽
+1
+^
+=
+∑
+(
+𝑥
+𝑖
+−
+𝑥
+ˉ
+)
+(
+𝑦
+𝑖
+−
+𝑦
+ˉ
+)
+∑
+(
+𝑥
+𝑖
+−
+𝑥
+ˉ
+)
+2
+β 
+1
+​
+ 
+^
+​
+ = 
+∑(x 
+i
+​
+ − 
+x
+ˉ
+ ) 
+2
+ 
+∑(x 
+i
+​
+ − 
+x
+ˉ
+ )(y 
+i
+​
+ − 
+y
+ˉ
+​
+ )
+​
+ 
+𝛽
+0
+^
+=
+𝑦
+ˉ
+−
+𝛽
+1
+^
+𝑥
+ˉ
+β 
+0
+​
+ 
+^
+​
+ = 
+y
+ˉ
+​
+ − 
+β 
+1
+​
+ 
+^
+​
+  
+x
+ˉ
+ 
+Where:
+
+𝛽
+1
+^
+β 
+1
+​
+ 
+^
+​
+  and 
+𝛽
+0
+^
+β 
+0
+​
+ 
+^
+​
+  are the estimated parameters,
+𝑥
+ˉ
+x
+ˉ
+  and 
+𝑦
+ˉ
+y
+ˉ
+​
+  are the mean values of 
+𝑥
+x and 
+𝑦
+y,
+𝑥
+𝑖
+x 
+i
+​
+  and 
+𝑦
+𝑖
+y 
+i
+​
+  are the individual data points.
+After calculating these values, you have an initial fitted line that describes the relationship between 
+𝑥
+x and 
+𝑦
+y.
 
 
 
