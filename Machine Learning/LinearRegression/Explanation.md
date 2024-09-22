@@ -92,11 +92,11 @@ Evaluation metrics are used after training to **assess the model’s performance
 
 4. **R-squared (\(R^2\))**:
 
-   $$R^2 = 1 - \frac{\sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2}{\sum_{i=1}^{n} (Y_i - \bar{Y})^2}$$
+   $$R^2 = 1 - \frac{\sum_{i=1}^{n} (Y_i - \hat{Y}i)^2}{\sum{i=1}^{n} (Y_i - \bar{Y})^2}$$
    - Measures the proportion of variance in the dependent variable that is predictable from the independent variable(s).
    - \(R^2\) ranges from 0 to 1, with higher values indicating a better fit. An $\(R^2\)$ value of 1 means the model perfectly predicts all data points, while 0 means it predicts nothing better than the mean of the data.
 
-5. **Adjusted R-squared**:
+6. **Adjusted R-squared**:
    
    $$\text{Adjusted } R^2 = 1 - \left(1 - R^2\right) \frac{n - 1}{n - k - 1}$$
    - Adjusted \(R^2\) accounts for the number of predictors in the model and adjusts the $\(R^2\$) value to penalize models that have too many predictors (i.e., models that overfit).
