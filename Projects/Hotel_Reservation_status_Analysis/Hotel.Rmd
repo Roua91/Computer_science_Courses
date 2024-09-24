@@ -1,0 +1,567 @@
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+# Hotel Booking Reservation Status Analysis
+
+## 1.0 Introduction
+
+Hotel booking cancellation can have a significant impacts on the hospitality industry and the operational efficiency of the hotels. Understanding the factors that contribute to higher cancellation rates is crucial to minimize the negative impacts. In this study we will be analyzing observations collected from hotel to discover the reason behind hotel cancellations and prevent it.
+
+## 2.0 Data set
+
+The data set contains 119390 observations collected from two types of hotels (City Hotel & Resort Hotel). Each observation represents a hotel booking over a period spanning from July 2015 till August 2017, including booking that effectively arrived and booking that were canceled.
+
+### columns:
+
+#### **Categorical Data:**
+
+1.  **hotel**: Type of hotel (City Hotel or Resort Hotel)
+2.  **is_canceled**: Whether the booking was canceled (1) or not (0)
+3.  **arrival_date_year**: Year of arrival date
+4.  **arrival_date_month**: Month of arrival date (January to December)
+5.  **meal**: Type of meal plan
+6.  **country**: Country of origin of the guest
+7.  **market_segment**: Market segment designation (e.g., TA – Travel Agents, TO – Tour Operators)
+8.  **distribution_channel**: Booking distribution channel (e.g., TA – Travel Agents, TO – Tour Operators)
+9.  **is_repeated_guest**: Whether the guest is a repeated guest (1) or not (0)
+10. **reserved_room_type**: Code for the room type reserved (anonymized)
+11. **assigned_room_type**: Code for the room type assigned (anonymized)
+12. **deposit_type**: Type of deposit (No Deposit, Non-Refund, Refundable)
+13. **customer_type**: Type of customer (Group, Transient, Transient-party)
+14. **reservation_status**: Status of the reservation (Check-Out, No-Show)
+15. **reservation_status_date**: Date when the last status was set
+
+#### **Numerical Data:**
+
+1.  **lead_time**: Number of days between booking and arrival
+2.  **arrival_date_week_number**: Week number of the arrival date
+3.  **arrival_date_day_of_month**: Day of the month of the arrival date
+4.  **stays_in_weekend_nights**: Number of weekend nights (Saturday or Sunday)
+5.  **stays_in_week_nights**: Number of weeknights (Monday to Friday)
+6.  **adults**: Number of adults in the booking
+7.  **children**: Number of children in the booking
+8.  **babies**: Number of babies in the booking
+9.  **previous_cancellations**: Number of previous bookings canceled by the guest
+10. **previous_bookings_not_canceled**: Number of previous bookings not canceled by the guest
+11. **booking_changes**: Number of changes or amendments made to the booking
+12. **days_in_waiting_list**: Number of days the booking was on the waiting list before confirmation
+13. **adr**: Average Daily Rate (calculated by dividing the total lodging transactions by the number of staying nights)
+14. **required_car_parking_spaces**: Number of car parking spaces required by the guest
+15. **total_of_special_requests**: Number of special requests made by the guest (e.g., twin bed, high floor)
+
+#### **Anonymized Data (will be droped):**
+
+-   **name**: Guest's name (not real)
+-   **email**: Guest's email (not real)
+-   **phone_number**: Guest's phone number (not real)
+-   **agent**: ID of the travel agency that made the booking (anonymized)
+-   **company**: ID of the company/entity responsible for the booking (anonymized)
+
+## 2.0 Data Validation
+
+### 2.1 Data Loading
+
+```{r}
+data <- read.csv("hotel_bookings.csv")
+
+print(data)
+```
+
+### 2.2 Data Summary
+
+```{r}
+summary(data)
+```
+
+**Notes:**
+
+-   The summary of is_canceled column mean is 0.3704, indicating a quite high calculation rate.
+
+-   Lead_time column range widly between 0 to 737, indicating the choice of guest booking early is widely varied.
+
+-   The demographic of the guest seems to be mostly adults. Families with children and babies are rare in this dataset.
+
+-   Several columns, such as company and agent have large amount of missing values, with the company column having over 112,000 NA values and the agent column over 16,000 NA values.
+
+##### Potentially Insignificant Columns:
+
+These columns might not provide much useful information for the analysis, based on the summary:
+
+1.  **Babies**: With a mean of only 0.0079, this variable has very little variance and is unlikely to provide meaningful insights.
+
+2.  **Children**: Similar to `babies`, the number of children in bookings is quite low and might not be a significant factor.
+
+3.  **Arrival Date Year and Month**: These columns may not directly affect cancellation, as there isn’t much variability across years or months unless analyzing seasonality in cancellations.
+
+4.  **Agent** and **Company**: Due to the large amount of missing data, these columns might be difficult to use effectively unless properly addressed.
+
+### Potentially Significant Columns:
+
+These columns are likely to be important for understanding the probability of cancellations:
+
+1.  **Lead Time**: Longer lead times may result in a higher likelihood of cancellation, as plans can change over time.
+
+2.  **Deposit Type**: Guests with no deposits or refundable deposits may be more likely to cancel.
+
+3.  **Previous Cancellations**: Guests with a history of cancellations are more likely to cancel again.
+
+4.  **Market Segment**: Different market segments may show different cancellation behaviors.
+
+5.  **ADR (Average Daily Rate)**: The cost per night may affect cancellation rates, particularly for expensive bookings.
+
+6.  **Special Requests**: A high number of special requests may correlate with cancellations, especially if guests’ needs aren't met.
+
+7.  **days_in_waiting_list:** high number of days waiting for the room confirmation may affect the cancellation
+
+### 2.3 Data Profiling
+
+```{r}
+library(DataExplorer)
+# create_report(data)
+```
+
+### 2.4 Analysis Specification
+
+#### 2.4.1Removing unnecessary columns
+
+```{r}
+# Load dplyr library
+library(dplyr)
+
+data <- data %>% select(-index, -babies, -children, -arrival_date_year, -arrival_date_month, -agent, -company, -arrival_date_week_number, -is_repeated_guest, -reservation_status_date, -previous_bookings_not_canceled)
+```
+
+#### 2.4.2 Focusing on City Hotels
+
+```{r}
+# Keep only "Resort Hotel" type rows
+data <- data %>%
+  filter(hotel == "City Hotel")
+```
+
+## 3.0 Data Cleaning and Preprocessing
+
+### 3.1 Checking Duplicates
+
+```{r}
+sum(duplicated(data))
+```
+
+the data set seem to have many duplicated observations. Further examination to the duplicated observation is required to determine whether the duplicates need to be removed or not.
+
+```{r}
+#checking some duplicated rows
+duplicates <- data[duplicated(data) | duplicated(data, fromLast = TRUE), ]
+head(duplicates, 50)
+
+```
+
+After checking some duplicates, they are mostly a result of data entry mistakes and not identical bookings. Nevertheless, there exist some duplicates where the booking are not identical but they share similar entries. Thus, the duplicates will be removed.
+
+```{r}
+clean_data <- data[!duplicated(data), ]
+```
+
+```{r}
+dim(clean_data)
+```
+
+### 3.2 Missing values
+
+#### 3.2.1 Checking for missing values
+
+```{r}
+colSums(is.na(clean_data))
+```
+
+There isn't any missing NA values in the dataset
+
+```{r}
+# Count occurrences of 'Undefined' per column
+sapply(clean_data, function(x) sum(x == 'Undefined'))
+
+```
+
+There are some undefined values in some columns like market segment, meal, and distribution_channel.
+
+#### 3.2.2 Handeling undefined values
+
+```{r}
+# Create a function to calculate the mode
+get_mode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+# Calculate the mode of market_segment and replace 'Undefined' values
+modeM <- get_mode(clean_data$market_segment)
+clean_data$market_segment <- replace(clean_data$market_segment, clean_data$market_segment == "Undefined", modeM)
+clean_data$market_segment <- factor(clean_data$market_segment)
+
+# Calculate the mode of distribution_channel and replace 'Undefined' values
+modeD <- get_mode(clean_data$distribution_channel)
+clean_data$distribution_channel <- replace(clean_data$distribution_channel, clean_data$distribution_channel == "Undefined", modeD)
+clean_data$distribution_channel <- factor(clean_data$distribution_channel)
+
+```
+
+## 3.3 Feature engineering and data encoding
+
+```{r}
+#feature engineering 
+
+clean_data <- clean_data %>% mutate(total_stay_duration = stays_in_weekend_nights + stays_in_week_nights)
+
+clean_data <- clean_data %>% mutate(adr_per_night = adr/ total_stay_duration)
+
+clean_data <- clean_data %>% mutate(special_requests = ifelse(total_of_special_requests > 0, 1, 0))
+
+clean_data <- clean_data %>% mutate(previous_cancelation = ifelse(previous_cancellations >0, 1, 0))
+
+clean_data <- clean_data %>% mutate(room_changed = ifelse(reserved_room_type != assigned_room_type, 1, 0))
+
+#Drop Unnecessary columsn to reduce dataset dimentionaltiy 
+clean_data <- clean_data %>%select(-stays_in_weekend_nights, -stays_in_week_nights, -total_of_special_requests,-previous_cancellations, -reserved_room_type, -assigned_room_type, -arrival_date_day_of_month, -adults, -meal, -required_car_parking_spaces, -country) 
+
+
+colnames(clean_data)
+
+#Factor encoding for the rest of categorical data 
+# Convert categorical variables to factors
+clean_data <- clean_data %>%
+  mutate(
+    market_segment = as.factor(market_segment),
+    distribution_channel = as.factor(distribution_channel),
+    customer_type = as.factor(customer_type),
+    deposit_type = as.factor(deposit_type)
+  )
+
+# Check the structure of the updated dataset
+str(clean_data)
+```
+
+## 3.4 Outliers Handling
+
+```{r}
+# Create boxplots for all numerical columns
+boxplot(clean_data$adr, main= "Boxplot for adr", ylab= "Values", col="lightblue")
+
+boxplot(clean_data$lead_time, main= "Boxplot for lead time", ylab= "Values", col="deepskyblue")
+
+boxplot(clean_data$total_stay_duration, main= "Boxplot for total stay duration", ylab= "Values", col="darkslategray3")
+```
+
+```{r}
+# ADR
+Q1 <- quantile(clean_data$adr, 0.25)
+Q3 <- quantile(clean_data$adr, 0.75)
+IQR_value <- Q3 - Q1
+
+lower_bound <- Q1 - 1.5 * IQR_value
+upper_bound <- Q3 + 1.5 * IQR_value
+
+
+# lead_time
+Q1_lead_time <- quantile(clean_data$lead_time, 0.25)
+Q3_lead_time <- quantile(clean_data$lead_time, 0.75)
+IQR_lead_time <- Q3_lead_time - Q1_lead_time
+
+lower_bound_lead_time <- Q1_lead_time - 1.5 * IQR_lead_time
+upper_bound_lead_time <- Q3_lead_time + 1.5 * IQR_lead_time
+
+# total_stay_duration
+Q1_total_stay <- quantile(clean_data$total_stay_duration, 0.25)
+Q3_total_stay <- quantile(clean_data$total_stay_duration, 0.75)
+IQR_total_stay <- Q3_total_stay - Q1_total_stay
+
+lower_bound_total_stay <- Q1_total_stay - 1.5 * IQR_total_stay
+upper_bound_total_stay <- Q3_total_stay + 1.5 * IQR_total_stay
+
+# Filtering the dataset
+cleanest_data <- subset(clean_data, adr > lower_bound & adr < upper_bound & 
+lead_time > lower_bound_lead_time & lead_time < upper_bound_lead_time & total_stay_duration > lower_bound_total_stay & total_stay_duration < upper_bound_total_stay)
+
+# Create boxplots for all numerical columns
+boxplot(cleanest_data$adr, main= "Boxplot for adr", ylab= "Values", col="lightblue")
+
+boxplot(cleanest_data$lead_time, main= "Boxplot for lead time", ylab= "Values", col="deepskyblue")
+
+boxplot(cleanest_data$total_stay_duration, main= "Boxplot for total stay duration", ylab= "Values", col="darkslategray3")
+
+
+```
+
+These are the boxplots after outliers’ removal. Since the columns contain some extreme outliers points, not all outliers were treated. Although the IQR multiplier could be reduced further to eliminate more outliers, but the decision not to remove all outliers was taken. This decision ensures that the dataset reflects the variability in booking behavior and some outliers are kept to ensure fairness in further analysis.
+
+## 3.5 Data Profiling again:
+
+```{r}
+create_report(cleanest_data)
+```
+
+# 4.0 Numerical Statistical Analysis
+
+## 4.1 Lead time statistics
+
+```{r}
+lead_time_stats <- cleanest_data %>%
+  group_by(reservation_status) %>%
+  summarise(
+    mean = mean(lead_time),
+    median = median(lead_time),
+    mode = get_mode(lead_time),
+    range = max(lead_time) - min(lead_time),
+    variance = var(lead_time),
+    sd = sd(lead_time),
+    iqr = IQR(lead_time)
+  )
+
+print(lead_time_stats)
+```
+
+**Key Points:**
+
+-   **Canceled reservations** tend to have longer lead times and show the highest variability, suggesting that guests who book far in advance are more likely to cancel.
+
+-   **Check-out reservations** generally have shorter lead times than canceled ones, but there is still significant variation in booking behavior.
+
+<!-- -->
+
+-   **No-show reservations** tend to have the shortest lead times, with many bookings made at the last minute or even for the same day, possibly indicating less commitment from these guests.
+
+**Tips to mitigate cancellation and no show-off issue:**
+
+-   For bookings with high lead time (showed high calcellation), offer more flexible cancellation terms but gradually tighten the policy as the check-in date approaches.
+
+-   For bookings with low lead time (which have higher no-show rates), consider requiring non-refundable deposits or limiting flexibility.
+
+-   For bookings made well in advance, remind guests a month, two weeks, and a few days before their stay.
+
+## 4.2 ADR (Average daily rate) statistics
+
+```{r}
+adr_stats <- cleanest_data %>%
+  group_by(reservation_status) %>%
+  summarise(
+    mean = mean(adr),
+    median = median(adr),
+    mode = get_mode(adr),
+    range = max(adr) - min(adr),
+    variance = var(adr),
+    sd = sd(adr),
+    iqr = IQR(adr)
+  )
+
+print(adr_stats)
+```
+
+**Key Points:**
+
+-   **Canceled bookings** have the highest ADR and the most variability, suggesting that higher-priced bookings are at greater risk of being canceled.
+
+-   **Check-out bookings** have a moderately high ADR with more consistency, indicating that guests are more likely to complete their stays in rooms with stable pricing.
+
+-   **No-shows** tend to happen more frequently for lower-priced bookings, and the consistency in ADR suggests that guests booking cheaper rooms are more likely to fail to show up.
+
+**Tips to mitigate Canceled booking and no show off:**
+
+-   for high ADR consider making offers that can attract the customers and reduce the probabitly of cancellation because of high priced bookings.
+
+-   Set non-refundable fees or some penalty for no show.
+
+## 4.3 Total Stay Duration Stats:
+
+```{r}
+stay_duration_stats <- cleanest_data %>%
+  group_by(reservation_status) %>%
+  summarise(mean = mean(total_stay_duration), 
+    median = median(total_stay_duration), 
+    mode = get_mode(total_stay_duration), 
+    range = max(total_stay_duration) - min(total_stay_duration),
+    variance = var(total_stay_duration),
+    sd = sd(total_stay_duration),
+    iqr = IQR(total_stay_duration)
+  )
+
+print(stay_duration_stats)
+
+```
+
+**Key points:**
+
+-   It doesn't seem there's a high correlation between reservation status subgroups and total stay duration.
+
+**tips to mitigate no show:**
+
+-   Short bookings (especially 1-night stays) should be monitored more carefully for no-show risks.
+
+## 
+
+# 5.0 Visualization
+
+## 5.1 **Categorical Variables**
+
+```{r}
+library(ggplot2)
+
+library(ggplot2)
+
+
+# Deposit Type vs. Reservation Status
+ggplot(cleanest_data, aes(x = deposit_type, fill = reservation_status)) +
+  geom_bar(position = "fill") +
+  labs(title = "Deposit Type vs. Reservation Status", x = "Deposit Type", y = "Proportion") +
+  theme_minimal()
+
+
+# Previous Cancellations vs. Reservation Status
+ggplot(cleanest_data, aes(x = as.factor(previous_cancelation), fill = reservation_status)) +
+  geom_bar(position = "fill") +
+  labs(title = "Previous Cancellations vs. Reservation Status", x = "Previous Cancellations", y = "Proportion") + theme_minimal()
+
+
+# Room Change vs. Reservation Status
+ggplot(cleanest_data, aes(x = as.factor(room_changed), fill = reservation_status)) +
+  geom_bar(position = "fill") +
+  labs(title = "Room Change vs. Reservation Status", x = "Room Changed", y = "Proportion") +
+  theme_minimal()
+
+# Customer Type vs. Reservation Status
+ggplot(cleanest_data, aes(x = customer_type, fill = reservation_status)) +
+  geom_bar(position = "fill") +
+  labs(title = "Customer Type vs. Reservation Status", x = "Customer Type", y = "Proportion") +
+  theme_minimal()
+
+
+
+# Market Segment vs. Reservation Status
+ggplot(cleanest_data, aes(x = market_segment, fill = reservation_status)) +
+  geom_bar(position = "fill") +
+  labs(title = "Market Segment vs. Reservation Status", x = "Market Segment", y = "Proportion") +
+  theme_minimal()
+
+# Distribution Channel vs. Reservation Status
+ggplot(cleanest_data, aes(x = distribution_channel, fill = reservation_status)) +
+  geom_bar(position = "fill") +
+  labs(title = "Distribution Channel vs. Reservation Status", x = "Distribution Channel", y = "Proportion") +
+  theme_minimal()
+
+
+# Special Requests vs. Reservation Status
+ggplot(cleanest_data, aes(x = as.factor(special_requests), fill = reservation_status)) +
+  geom_bar(position = "fill") +
+  labs(title = "Special Requests vs. Reservation Status", x = "Number of Special Requests", y = "Proportion") +
+  theme_minimal()
+
+
+
+# Meal Plan vs. Reservation Status
+ggplot(cleanest_data, aes(x = meal, fill = reservation_status)) +
+  geom_bar(position = "fill") +
+  labs(title = "Meal Plan vs. Reservation Status", x = "Meal Plan", y = "Proportion") +
+  theme_minimal()
+
+```
+
+## 5.2 Numerical Variables
+
+```{r}
+# Load necessary library
+library(ggplot2)
+
+# Histogram for lead_time
+ggplot(cleanest_data, aes(x = lead_time)) +
+  geom_histogram(binwidth = 30, fill = "skyblue", color = "black") +
+  labs(title = "Distribution of Lead Time", x = "Lead Time", y = "Count") +
+  theme_minimal()
+
+# Histogram for adr
+ggplot(cleanest_data, aes(x = adr)) +
+  geom_histogram(binwidth = 20, fill = "deepskyblue", color = "black") +
+  labs(title = "Distribution of ADR (Average Daily Rate)", x = "ADR", y = "Count") +
+  theme_minimal()
+
+# Histogram for total_stay_duration
+ggplot(cleanest_data, aes(x = total_stay_duration)) +
+  geom_histogram(binwidth = 1, fill = "darkslategray3", color = "black") +
+  labs(title = "Distribution of Total Stay Duration", x = "Total Stay Duration (Nights)", y = "Count") +
+  theme_minimal()
+
+```
+
+```{r}
+# Density plot of lead_time by reservation_status
+ggplot(cleanest_data, aes(x = lead_time, fill = reservation_status)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Density Plot of Lead Time by Reservation Status", x = "Lead Time", y = "Density") +
+  theme_minimal()
+
+# Density plot of adr by reservation_status
+ggplot(cleanest_data, aes(x = adr, fill = reservation_status)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Density Plot of ADR by Reservation Status", x = "ADR", y = "Density") +
+  theme_minimal()
+
+# Density plot of total_stay_duration by reservation_status
+ggplot(cleanest_data, aes(x = total_stay_duration, fill = reservation_status)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Density Plot of Total Stay Duration by Reservation Status", x = "Total Stay Duration", y = "Density") +
+  theme_minimal()
+
+
+```
+
+```{r}
+# Set graphical layout to 1 row and 3 columns
+par(mfrow = c(1, 3))
+
+# Boxplot for adr
+boxplot(cleanest_data$adr, main= "Boxplot for ADR", ylab= "Values", col="lightblue")
+
+# Boxplot for lead time
+boxplot(cleanest_data$lead_time, main= "Boxplot for Lead Time", ylab= "Values", col="deepskyblue")
+
+# Boxplot for total stay duration
+boxplot(cleanest_data$total_stay_duration, main= "Boxplot for Total Stay Duration", ylab= "Values", col="darkslategray3")
+
+```
+
+## 6.0 Naive bayes
+
+```{r}
+library(e1071)
+library(caTools)
+library(caret)
+
+# splitting the data into train and test data 
+split <- sample.split(cleanest_data, SplitRatio = 0.8)
+train_cl <- subset(cleanest_data, split= TRUE)
+test_cl <- subset(cleanest_data, split = FALSE)
+str(train_cl)
+str(test_cl)
+```
+
+```{r}
+set.seed(120) #setting seed
+classifier_cl <- naiveBayes(reservation_status ~ ., data = train_cl)
+classifier_cl
+```
+
+```{r}
+y_pred <- predict(classifier_cl, newdata =  train_cl)
+
+cm <- table(test_cl$reservation_status, y_pred)
+cm
+
+
+confusionMatrix(cm)
+```
+
+6.2 Random Forest Regression
+
+```{r}
+library(randomForest)
+library(ggplot2)
+library(MASS)
+```
