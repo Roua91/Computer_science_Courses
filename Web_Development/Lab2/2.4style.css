@@ -1,0 +1,13 @@
+head
+{
+    padding:0;
+    margin:0;
+}
+
+body
+{
+    background-image: url(backgroundie.jpg);
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+}
