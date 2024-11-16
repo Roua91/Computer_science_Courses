@@ -1,0 +1,172 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Week 7: Feature Selection
+
+**Filter method and embedded method**
+
+Applying filter method (Correlation) and embedded method (Random Forest) on the iris dataset
+
+```{r}
+set.seed(42)
+trainIndex <- createDataPartition(iris$Species, p= .8, list = FALSE)
+trainData <- iris[trainIndex, ]
+testData <- iris[-trainIndex, ]
+```
+
+```{r}
+library(randomForest)
+library(caret)
+
+#compute correlation matrix 
+corMatrix <- cor(trainData[, -5])
+highCOrFeatures <- findCorrelation(corMatrix, cutoff = .7)
+print(corMatrix)
+
+#Removing highly correlated variables 
+reduceTrainData <- trainData[, -highCOrFeatures]
+
+# Check the reduced data
+head(reduceTrainData)
+
+```
+
+```{r}
+# random forest 
+model1 <- randomForest(Species ~ ., data= reduceTrainData)
+print(model1)
+reduceTestData <- testData[, -highCOrFeatures]
+pred1 <- predict(model1, reduceTestData)
+confusionMatrix(pred1, testData$Species)
+```
+
+**Recursive feature elimination (RFE) with random forest**
+
+Applying wrapper method (recursive feature elimination) and embedded method (random forest) on iris data set.
+
+```{r}
+#rfe
+control2 <- rfeControl(functions = rfFuncs, method = "cv", number = 10)
+results2 <- rfe(trainData[, 1:4], trainData[,5], sizes=c(1:4), rfeControl = control2)
+
+print(results2)
+```
+
+```{r}
+# Correcting the formula in randomForest
+model2 <- randomForest(Species ~ ., 
+                       data = trainData[, c(results2$optVariables, "Species")])
+
+# Correcting the predict function by fixing the typo "Spieces" -> "Species"
+pred2 <- predict(model2, testData[, c(results2$optVariables, "Species")])
+
+# Calculating the confusion matrix
+confusionMatrix(pred2, testData$Species)
+```
+
+## Feature Extraction
+
+### princple component anlysis PCA
+
+```{r}
+data(mtcars) #loading data
+
+#Need to scale/ NOrmalize as PCA depends on distance measure 
+my_pca <- prcomp(mtcars, scale = TRUE, center = TRUE, retx = T)
+
+names(my_pca)
+```
+
+```{r}
+summary(my_pca)
+my_pca
+my_pca$rotation # View the principal component loading
+dim(my_pca$x) # See the principal components
+my_pca$x
+```
+
+```{r}
+# Plotting the resultant principal components
+# The parameter scale=0 ensures that arrows are scaled to represent the loadings
+biplot(my_pca, main = "Biplot", scale = 0)
+```
+
+```{r}
+my_pca$sdev # Compute standard deviation
+my_pca.var <- my_pca$sdev ^ 2 # Compute variance
+propve <- my_pca.var / sum(my_pca.var) # Proportion of variance for scree plot
+```
+
+```{r}
+# Plot variance explained for each principal component
+plot(propve, xlab = "principal component",
+     ylab = "Proportion of Variance Explained",
+     ylim = c(0, 1), type = "b", main = "Scree Plot")
+```
+
+```{r}
+# Plot the cumulative proportion of variance explained
+plot(cumsum(propve), xlab = "Principal Component",
+     ylab = "Cumulative Proportion of Variance Explained", 
+     ylim = c(0, 1), type = "b")
+```
+
+```{r}
+# Find Top n principal component which will at least 
+# cover 90% variance of dimension
+which(cumsum(propve) >= 0.9)[1]
+```
+
+```{r}
+# Predict mpg using first 4 new Principal Components
+# Add a training set with principal components
+train.data <- data.frame(disp = mtcars$disp, my_pca$x[, 1:4])
+```
+
+```{r}
+# Running a Decision tree algporithm
+library(rpart)
+library(rpart.plot)
+rpart.model <- rpart(disp ~ ., data = train.data, method = "anova")
+rpart.plot(rpart.model)
+```
+
+## LINEAR DISCREMINANT ANALYSIS
+
+```{r}
+
+library(MASS) 
+library(tidyverse) 
+library(caret) 
+theme_set(theme_classic()) 
+data("iris") # Load the data 
+```
+
+```{r}
+# Split the data into training (80%) and test set (20%) 
+set.seed(123) 
+training.individuals <- iris$Species %>% 
+  createDataPartition(p = 0.8, list = FALSE) 
+train.data <- iris[training.individuals, ] 
+test.data <- iris[-training.individuals, ] 
+```
+
+```{r}
+# Estimate preprocessing parameters 
+preproc.parameter <- train.data %>% preProcess(method = c("center", "scale")) 
+
+# Transform the data using the estimated parameters 
+train.transform <- preproc.parameter %>% predict(train.data) 
+test.transform <- preproc.parameter %>% predict(test.data) 
+```
+
+```{r}
+model <- lda(Species~., data = train.transform) # Fit the model
+predictions <- model %>% predict(test.transform) # Make predictions 
+mean(predictions$class==test.transform$Species) # Model accuracy 
+model <- lda(Species~., data = train.transform) 
+model 
+
+```
