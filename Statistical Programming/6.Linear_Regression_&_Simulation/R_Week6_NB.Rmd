@@ -1,0 +1,107 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Week 6: Simulation
+
+## Naive Bayes Classifier
+
+### libraries
+
+```{r}
+library(e1071)
+library(caTools)
+library(caret)
+```
+
+### splitting the data
+
+```{r}
+# splitting the data into train and test data 
+split <- sample.split(iris, SplitRatio = 0.7)
+train_cl <- subset(iris, split= TRUE)
+test_cl <- subset(iris, split = FALSE)
+str(train_cl)
+str(test_cl)
+```
+
+### feature scalling
+
+to make sure the data is normalized
+
+```{r}
+train_scale <- scale(train_cl[, 1:4])
+test_scale <- scale(test_cl[, 1:4])
+
+head(train_scale)
+head(test_scale)
+```
+
+### Fitting the naive bayes model to training data set (Non-Scaled)
+
+```{r}
+set.seed(200) #setting seed
+classifier_cl <- naiveBayes(Species ~ ., data = train_cl)
+classifier_cl
+```
+
+```{r}
+y_pred <- predict(classifier_cl, newdata =  train_cl)
+
+cm <- table(test_cl$Species, y_pred)
+cm
+
+
+confusionMatrix(cm)
+```
+
+### 
+
+## Random Forest Regression
+
+```{r}
+#load necessary libraries
+library(randomForest)
+library(ggplot2)
+library(MASS)
+```
+
+```{r}
+data(Boston)
+```
+
+```{r}
+#split the dataset into training and test 
+set.seed(123)
+train_indices <- sample(1:nrow(Boston), 0.7 * nrow(Boston))
+train_data <- Boston[train_indices, ]
+test_data <- Boston[-train_indices, ]
+```
+
+```{r}
+#fit the random forest regression model
+rf_model <- randomForest(medv ~ ., data= train_data)
+```
+
+```{r}
+#make prediction on the test set
+predictions <- predict(rf_model, test_data)
+
+head
+```
+
+```{r}
+#Visualise predictions vs actual values
+ggplot(data.frame(predicted = predictions, Actual = test_data$medv),
+       aes(x= Actual, y= predicted))+ geom_point() +
+         geom_abline(intercept = 0, slope = 1, color = "red", linetype = "dashed")+
+         labs(title = "Random Forest Predictions on Boston Housing dataset",
+              x = "Actual Vlaues", y = "Predicted Values")
+```
+
+```{r}
+#Evaluate the accuracy 
+accuracy <- sqrt(mean(predictions - test_data$medv)^2)
+cat("Boston mean square error:", accuracy, "\n")
+```

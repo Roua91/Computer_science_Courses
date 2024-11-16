@@ -1,0 +1,82 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Week 6: Simple linear Regression
+
+## Correlation:
+
+**Spearman correlation** measures the **rank correlation** between two variables. It assesses how well the relationship between two variables can be described using a monotonic function. It is a **non-parametric** measure, meaning it does not assume a normal distribution of the data.
+
+```{r}
+
+#correlation 
+cor(iris[, 1:2], method = "spearman")
+```
+
+**Pearson correlation** measures the **linear relationship** between two variables. It assumes that both variables are normally distributed and measures the strength and direction of the linear association. Pearson correlation ranges from -1 to 1, where:
+
+```{r}
+cor(iris[, 1:2], method = "pearson")
+```
+
+```{r}
+cor(iris[,-5], method = "pearson")
+```
+
+testing hypothesis for r squared
+
+```{r}
+x <- c(1,2,3,4,5,6,7)
+y <- c(3,3,6,2,7,4,5)
+
+cor.test(x, y, method= "pearson")
+```
+
+-   The **correlation coefficient** is **0.3859**, which suggests a weak positive relationship between `x` and `y`.
+
+-   The p-value (0.3926) is greater than 0.05, so we fail to reject the null hypothesis. Thus, we do not have sufficient evidence to conclude that there is a statistically significant correlation between `x` and `y`.
+
+-   The **95% confidence interval** includes 0, further supporting the possibility that there may be no real linear relationship between `x` and `y`.
+
+## Simple Linear regression
+
+```{r}
+# Simple linear regression using Sepal.Width to predict Sepal.Length
+model_simple <- lm(Sepal.Length ~ Sepal.Width, data = iris)
+
+# View the summary of the simple linear regression model
+summary(model_simple)
+
+```
+
+**Residuals:** The residuals spans between -1.55 which is the min residual and 2.2226 which is the max residual. 50% of the residualss are concentrated between -0.6333 and 0.5579.
+
+**Coefficients:**
+
+Beta 0: 6.5262 and Bata1: -0.2234
+
+The p value for sepal width is 0.152. p-value \> 0.05, thus we fail to reject the null hypothesis. We don't have sufficient evidence that there's a correlation between sepal.width and y.
+
+**Linear regression fitting evaluation**
+
+Residual Standard error: 0.825 is the standard deviation of the residual errors. A lower value indicate a lower resiual error spread.
+
+Multiple R-squared: 0.0138 means that the chosen variable is not explain y very well
+
+Adjusted R-squared: a low value indicating a low explanatory power.
+
+P-value: is greater that 0.05. Thus, we fail to reject the null hypothesis. there’s insufficient evidence that `Sepal.Width` is a statistically significant predictor of `Sepal.Length`.
+
+multiple linear regression
+
+```{r}
+irisml <- lm(Sepal.Length ~ Sepal.Width+ Petal.Length + Petal.Width, data = iris)
+```
+
+Beta0= 1.8560, Beta1= 0.65, Beta2= 0.7091, Beta3= -0.5565 y = 1.8560 + 0.65x1 + 0.7091x2- 0.5565x3
+
+```{r}
+summary(irisml)
+```
