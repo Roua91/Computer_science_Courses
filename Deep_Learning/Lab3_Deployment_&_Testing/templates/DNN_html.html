@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digit Recognizer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('{{ url_for('static', filename='digitsie.jpg') }}');
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .main-container h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+        }
+
+        .content-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .upload-section, .prediction-section {
+            flex: 1;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .upload-container {
+            background-color: #f0f0f0;
+            border: 2px dashed #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 350px;
+            width: 90%;
+            border-radius: 5px;
+        }
+
+        .upload-container label {
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px; /* Added margin for spacing */
+        }
+
+        .prediction-section {
+            background-color: #f9f9f9;
+            height: 350px;
+            width: 90%;
+            border-radius: 5px;
+            border: 2px solid #ccc;
+        }
+
+        .prediction-section h2 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .prediction-section img {
+            max-width: 80%;
+            max-height: 200px;
+            margin-top: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #prediction-result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h1>Hand Digit Recognition</h1>
+        <div class="content-container">
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <div class="upload-container">
+
+                    <form id="upload-form" method="POST" enctype="multipart/form-data" action="/predict">
+                        <label for="file-upload">Upload a Digit Image</label>
+                        <input type="file" id="file-upload" name="file" accept="image/*">
+                        <button type="submit" style="margin-top: 20px;">Submit</button>
+                    </form>
+                    
+                </div>
+            </div>
+
+            <!-- Prediction Section -->
+            <div class="prediction-section">
+                <h2>Prediction Result</h2>
+                <div id="prediction-result">
+                    <p>No prediction yet. Upload an image to get started.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the form from reloading the page
+
+            const formData = new FormData(form); // Collect the form data
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await response.json();
+            const resultDiv = document.getElementById('prediction-result');
+
+            if (result.prediction !== undefined) {
+                resultDiv.innerHTML = `<h2>Predicted Digit: ${result.prediction}</h2>`;
+            } else {
+                resultDiv.innerHTML = `<h2>Error: ${result.error}</h2>`;
+            }
+        });
+    </script>
+</body>
+</html>
